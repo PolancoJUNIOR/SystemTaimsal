@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SysTaimsal.DAL\SysTaimsal.DAL.csproj" />
+    <ProjectReference Include="..\SysTaimsal.EL\SysTaimsal.EL.csproj" />
+  </ItemGroup>
+
+</Project>
