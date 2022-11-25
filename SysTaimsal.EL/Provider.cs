@@ -12,13 +12,12 @@ namespace SysTaimsal.EL
     {
         [Key]
         public int IdProvider { get; set; }
-        [ForeignKey("Machine")]
-        [Required(ErrorMessage = "Machine es obligatorio")]
-        [Display(Name = "Machine")]
-        public int? IdMachine { get; set; }
+      
         [Required(ErrorMessage ="Nombre es obligatorio")]
         [StringLength(40, ErrorMessage ="Maximo 40 caracteres")]
         [Display(Name = "Nombre de producto")]
         public string? NameProvider { get; set; }
+        [NotMapped]
+        public int Top_Aux { get; set; }
     }
 }
