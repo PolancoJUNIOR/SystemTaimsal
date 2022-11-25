@@ -16,6 +16,11 @@ namespace SysTaimsal.EL
         [Required(ErrorMessage = "Rol es obligatorio")]
         [Display(Name = "Rol")]
         public int IdRol { get; set; }
+        [ForeignKey("Employee")]
+        [Required(ErrorMessage ="Empleado es necesario")]
+        [Display(Name = "Employee")]
+        public List<int>? Employee { get; set; }
+
         [Required(ErrorMessage = "Nombre es obligatorio")]
         [StringLength(30, ErrorMessage = "Maximo 30 caracteres")]
         public string NameUser { get; set; }
