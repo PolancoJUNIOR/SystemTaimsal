@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SysTaimsal.DAL", "SysTaimsa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SysTaimsal.BL", "SysTaimsal.BL\SysTaimsal.BL.csproj", "{03F20C3C-BADA-4E6D-A175-EF9BE4AB0311}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SysTaimsal.UnitTests", "SysTaimsal.UnitTests\SysTaimsal.UnitTests.csproj", "{DCC5B689-9E9E-461C-BDE1-C2C793447084}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SysTaimsal.UnitTests", "SysTaimsal.UnitTests\SysTaimsal.UnitTests.csproj", "{DCC5B689-9E9E-461C-BDE1-C2C793447084}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SysTaimsal.UI", "SysTaimsal.UI\SysTaimsal.UI.csproj", "{676BD9E4-F576-4CE8-94A1-3101FB29FF74}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{DCC5B689-9E9E-461C-BDE1-C2C793447084}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DCC5B689-9E9E-461C-BDE1-C2C793447084}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DCC5B689-9E9E-461C-BDE1-C2C793447084}.Release|Any CPU.Build.0 = Release|Any CPU
+		{676BD9E4-F576-4CE8-94A1-3101FB29FF74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{676BD9E4-F576-4CE8-94A1-3101FB29FF74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{676BD9E4-F576-4CE8-94A1-3101FB29FF74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{676BD9E4-F576-4CE8-94A1-3101FB29FF74}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

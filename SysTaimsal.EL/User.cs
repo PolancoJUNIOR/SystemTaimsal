@@ -19,7 +19,7 @@ namespace SysTaimsal.EL
         [ForeignKey("Employee")]
         [Required(ErrorMessage ="Empleado es necesario")]
         [Display(Name = "Employee")]
-        public List<int>? Employee { get; set; }
+        public int? Employee { get; set; }
 
         [Required(ErrorMessage = "Nombre es obligatorio")]
         [StringLength(30, ErrorMessage = "Maximo 30 caracteres")]
@@ -39,6 +39,7 @@ namespace SysTaimsal.EL
         [Display(Name = "Fecha registro")]
         public DateTime RegistrationDate { get; set; }
         public Rol Rol { get; set; }
+        public List<Employee> Employees{ get; set; }
         [NotMapped]
         public int Top_Aux { get; set; }
         [NotMapped]
