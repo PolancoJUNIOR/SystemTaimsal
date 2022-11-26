@@ -15,8 +15,12 @@ namespace SysTaimsal.EL
         [ForeignKey("Employee")]
         [Required(ErrorMessage = "Empleado es necesario")]
         [Display(Name = "Employee")]
-        public int? IdEmployee { get; set; }
+        public int IdEmployee { get; set; }
         public DateTime? DayAttendence { get; set; }
         public TimeSpan? CheckInTime { get; set; }
+        [NotMapped]
+        public int Top_Aux { get; set; }
+
+        public virtual Employee? IdEmployeeNavigation { get; set; }
     }
 }

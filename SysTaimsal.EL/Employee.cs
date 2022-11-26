@@ -15,12 +15,14 @@ namespace SysTaimsal.EL
         public int? IdMachine { get; set; }
         [Required(ErrorMessage = "Nombre es obligatorio")]
         [StringLength(30, ErrorMessage = "Maximo 30 caracteres")]
-        public string? NameEmployee { get; set; }
+        public string NameEmployee { get; set; }
         [Required(ErrorMessage = "Nombre es obligatorio")]
         [StringLength(30, ErrorMessage = "Maximo 30 caracteres")]
-        public string? LastNameEmployee { get; set; }
+        public string LastNameEmployee { get; set; }
         [StringLength (30, ErrorMessage ="Maximo 30 caracteres")]
         public string? Rol { get; set; }
+        [NotMapped]
+        public int Top_Aux { get; set; }
         public string FullName()
         {
             string NameF = NameEmployee + " " + LastNameEmployee;
