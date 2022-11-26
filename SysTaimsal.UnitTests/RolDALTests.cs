@@ -16,7 +16,7 @@ namespace SysTaimsal.DAL.Tests
         private static Rol rolInitial = new Rol { Id = 1 };
 
         [TestMethod()]
-        public async void T1CrearteAsyncTest()
+        public async Task T1CrearteAsyncTest()
         {
             var rol = new Rol();
             rol.Id = rolInitial.Id;
@@ -27,7 +27,7 @@ namespace SysTaimsal.DAL.Tests
         }
 
         [TestMethod()]
-        public async void T2ModifyAsyncTest()
+        public async Task T2ModifyAsyncTest()
         {
             var rol = new Rol();
             rol.Id = rolInitial.Id;
@@ -37,7 +37,7 @@ namespace SysTaimsal.DAL.Tests
         }
 
         [TestMethod()]
-        public async void T3GetByIdAsyncTest()
+        public async Task T3GetByIdAsyncTest()
         {
             var rol = new Rol();
             rol.Id = rolInitial.Id;
@@ -46,14 +46,14 @@ namespace SysTaimsal.DAL.Tests
         }
 
         [TestMethod()]
-        public async void T4GetAllAsyncTest()
+        public async Task T4GetAllAsyncTest()
         {
             var result = await RolDAL.GetAllAsync();
             Assert.AreNotEqual(0, result.Count);
         }
 
         [TestMethod()]
-        public async void T5SearchAsyncTest()
+        public async Task T5SearchAsyncTest()
         {
             var rol = new Rol();
             rol.NameRol = "1";
@@ -63,7 +63,7 @@ namespace SysTaimsal.DAL.Tests
         }
 
         [TestMethod()]
-        public async void T6DeleteAsyncTest()
+        public async Task T6DeleteAsyncTest()
         {
             var rol = new Rol();
             rol.Id = rolInitial.Id;

@@ -13,7 +13,7 @@ namespace SysTaimsal.DAL.Tests
     {
         private static User UserInitial = new User { Id = 1, IdRol = 1, Login = "RonaldUser", Password = "12345" };
         [TestMethod()]
-        public async void T1CreateAsyncTest()
+        public async Task T1CreateAsyncTest()
         {
             var User = new User();
             User.IdRol = UserInitial.IdRol;
@@ -31,7 +31,7 @@ namespace SysTaimsal.DAL.Tests
         }
 
         [TestMethod()]
-        public async void T2ModifyAsyncTest()
+        public async Task T2ModifyAsyncTest()
         {
             var user = new User();
             user.Id = UserInitial.Id;
@@ -45,7 +45,7 @@ namespace SysTaimsal.DAL.Tests
         }
 
         [TestMethod()]
-        public async void T3GetByIdAsyncTest()
+        public async Task T3GetByIdAsyncTest()
         {
             var user = new User();
             user.Id = UserInitial.Id;
@@ -54,14 +54,14 @@ namespace SysTaimsal.DAL.Tests
         }
 
         [TestMethod()]
-        public async void T4GetAllAsyncTest()
+        public async Task T4GetAllAsyncTest()
         {
             var resultUser = await UserDAL.GetAllAsync();
             Assert.AreNotEqual(0, resultUser.Count);
         } 
 
         [TestMethod()]
-        public async void T5SearchAsyncTest()
+        public async Task T5SearchAsyncTest()
         {
             var user = new User();
             user.IdRol = UserInitial.IdRol;
@@ -74,7 +74,7 @@ namespace SysTaimsal.DAL.Tests
             Assert.AreNotEqual(0, resultUser.Count);
         }
         [TestMethod()]
-        public async void T6SearchIncludeRolesAsyncTest()
+        public async Task T6SearchIncludeRolesAsyncTest()
         {
             var user = new User();
             user.IdRol = UserInitial.IdRol;
@@ -90,7 +90,7 @@ namespace SysTaimsal.DAL.Tests
         }
 
         [TestMethod()]
-        public async void T7ChangePasswordAsyncTest()
+        public async Task T7ChangePasswordAsyncTest()
         {
             var user = new User();
             user.Id = UserInitial.Id;
@@ -103,7 +103,7 @@ namespace SysTaimsal.DAL.Tests
 
 
         [TestMethod()]
-        public async void T8LoginAsyncTest()
+        public async Task T8LoginAsyncTest()
         {
             var user = new User();
             user.Id = UserInitial.Id;
@@ -113,7 +113,7 @@ namespace SysTaimsal.DAL.Tests
         }
             
         [TestMethod()]
-        public async void T9DeleteAsyncTest()
+        public async Task T9DeleteAsyncTest()
         {
             var user = new User();
             user.Id = UserInitial.Id;

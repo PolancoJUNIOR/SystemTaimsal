@@ -62,7 +62,7 @@ namespace SysTaimsal.DAL.Tests
         }
 
         [TestMethod()]
-        public async void DeleteAsyncTest()
+        public async void T6DeleteAsyncTest()
         {
             var client = new Client();
             client.IdClient = clientInitial.IdClient;
