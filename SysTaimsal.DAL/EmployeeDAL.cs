@@ -31,7 +31,6 @@ namespace SysTaimsal.DAL
                 employee.IdMachine = pEmployee.IdMachine;
                 employee.NameEmployee = pEmployee.NameEmployee;
                 employee.LastNameEmployee = pEmployee.LastNameEmployee;
-                employee.Rol = pEmployee.Rol;
                 DbContext.Update(employee);
                 result = await DbContext.SaveChangesAsync();
             }
@@ -70,8 +69,6 @@ namespace SysTaimsal.DAL
                 pQuery = pQuery.Where(s => s.NameEmployee.Contains(pEmployee.NameEmployee));
             if (!string.IsNullOrWhiteSpace(pEmployee.LastNameEmployee))
                 pQuery = pQuery.Where(s => s.LastNameEmployee.Contains(pEmployee.LastNameEmployee));
-            if (!string.IsNullOrWhiteSpace(pEmployee.Rol))
-                pQuery = pQuery.Where(s => s.Rol.Contains(pEmployee.LastNameEmployee));
             if (pEmployee.Top_Aux > 0)
             {
                 pQuery = pQuery.Take(pEmployee.Top_Aux).AsQueryable();
