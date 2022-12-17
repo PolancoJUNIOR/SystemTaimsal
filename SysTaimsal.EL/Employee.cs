@@ -20,7 +20,7 @@ namespace SysTaimsal.EL
         [StringLength(30, ErrorMessage = "Maximo 30 caracteres")]
         public string LastNameEmployee { get; set; }
         [StringLength (30, ErrorMessage ="Maximo 30 caracteres")]
-        public string? Rol { get; set; }
+        
         [NotMapped]
         public int Top_Aux { get; set; }
         public string FullName()
