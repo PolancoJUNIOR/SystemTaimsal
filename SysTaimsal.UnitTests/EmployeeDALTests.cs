@@ -14,7 +14,7 @@ namespace SysTaimsal.DAL.Tests
     {
         private static Employee EmployeeInitial = new Employee { IdEmployee = 1, IdMachine = 1, NameEmployee = "Juanito", LastNameEmployee = "Perez"};
         [TestMethod()]
-        public async void T1CreateAsyncTest()
+        public async Task T1CreateAsyncTest()
         {
             var Employee = new Employee();
             Employee.IdEmployee = EmployeeInitial.IdEmployee;
@@ -22,11 +22,10 @@ namespace SysTaimsal.DAL.Tests
             Employee.LastNameEmployee = EmployeeInitial.LastNameEmployee;
             int result = await EmployeeDAL.CreateAsync(Employee);
             Assert.AreEqual(0, result);
-            EmployeeInitial.IdEmployee = Employee.IdEmployee;
         }
 
         [TestMethod()]
-        public async void T2ModifyAsyncTest()
+        public async Task T2ModifyAsyncTest()
         {
             var Employee = new Employee();
             Employee.IdEmployee = EmployeeInitial.IdEmployee;
@@ -36,7 +35,7 @@ namespace SysTaimsal.DAL.Tests
         }
 
         [TestMethod()]
-        public async void T3GetByIdAsyncTest()
+        public async Task T3GetByIdAsyncTest()
         {
             var Employee = new Employee();
             Employee.IdMachine = EmployeeInitial.IdEmployee;
@@ -45,14 +44,14 @@ namespace SysTaimsal.DAL.Tests
         }
 
         [TestMethod()]
-        public async void T4GetAllAsyncTest()
+        public async Task T4GetAllAsyncTest()
         {
             var resutl = await EmployeeDAL.GetAllAsync();
             Assert.AreNotEqual(0, resutl.Count);
         }
 
         [TestMethod()]
-        public async void T5SearchAsyncTest()
+        public async Task T5SearchAsyncTest()
         {
             var Employee = new Employee();
             Employee.IdEmployee = EmployeeInitial.IdEmployee;
@@ -62,7 +61,7 @@ namespace SysTaimsal.DAL.Tests
         }
 
         [TestMethod()]
-        public async void T6DeleteAsyncTest()
+        public async Task T6DeleteAsyncTest()
         {
             var Employee = new Employee();
             Employee.IdEmployee = EmployeeInitial.IdEmployee;
