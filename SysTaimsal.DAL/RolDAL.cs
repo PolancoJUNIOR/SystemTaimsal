@@ -26,7 +26,7 @@ namespace SysTaimsal.DAL
             int result = 0;
             using (var BDContext = new SysTaimsalBDContext())
             {
-                var rol = await BDContext.Rol.FirstOrDefaultAsync(s => s.Id == pRol.Id);
+                var rol = await BDContext.Rol.FirstOrDefaultAsync(s => s.IdRol == pRol.IdRol);
                 rol.NameRol = pRol.NameRol;
                 BDContext.Update(rol);
                 result = await BDContext.SaveChangesAsync();
@@ -39,7 +39,7 @@ namespace SysTaimsal.DAL
             var rol = new Rol();
             using (var BDContext = new SysTaimsalBDContext())
             {
-                rol = await BDContext.Rol.FirstOrDefaultAsync(s => s.Id == pRol.Id);
+                rol = await BDContext.Rol.FirstOrDefaultAsync(s => s.IdRol == pRol.IdRol);
             }
             return rol;
         }
@@ -55,11 +55,11 @@ namespace SysTaimsal.DAL
         }
         internal static IQueryable<Rol> QuerySelect(IQueryable<Rol> pQuery, Rol pRol)
         {
-            if (pRol.Id > 0)
-                pQuery = pQuery.Where(s => s.Id == pRol.Id);
+            if (pRol.IdRol > 0)
+                pQuery = pQuery.Where(s => s.IdRol == pRol.IdRol);
             if (!string.IsNullOrWhiteSpace(pRol.NameRol))
                 pQuery = pQuery.Where(s => s.NameRol.Contains(pRol.NameRol));
-            pQuery = pQuery.OrderByDescending(s => s.Id).AsQueryable();
+            pQuery = pQuery.OrderByDescending(s => s.IdRol).AsQueryable();
             if (pRol.Top_Aux > 0)
                 pQuery = pQuery.Take(pRol.Top_Aux).AsQueryable();
             return pQuery;
@@ -80,7 +80,7 @@ namespace SysTaimsal.DAL
             int result = 0;
             using (var BDContext = new SysTaimsalBDContext())
             {
-                var rol = await BDContext.Rol.FirstOrDefaultAsync(s => s.Id == pRol.Id);
+                var rol = await BDContext.Rol.FirstOrDefaultAsync(s => s.IdRol == pRol.IdRol);
                 BDContext.Rol.Remove(rol);
                 result = await BDContext.SaveChangesAsync();
             }

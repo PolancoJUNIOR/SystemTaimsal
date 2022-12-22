@@ -8,15 +8,18 @@ using System.Threading.Tasks;
 
 namespace SysTaimsal.EL
 {
-    public class Rol
+    public partial class Rol
     {
+        public Rol(){
+            users = new HashSet<User>();
+        }
         [Key]
-        public int Id { get; set; }
+        public int IdRol { get; set; }
         [Required(ErrorMessage = "Nombre es obligatorio")]
         [StringLength(30, ErrorMessage = "Maximo 30 caracteres")]
         public string NameRol { get; set; }
         [NotMapped]
         public int Top_Aux { get; set; }
-        public List<User> users { get; set; }
+        public virtual ICollection<User> users { get; set; }
     }
 }

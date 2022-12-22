@@ -13,36 +13,36 @@ namespace SysTaimsal.DAL.Tests
     [TestClass()]
     public class RolDALTests
     {
-        private static Rol rolInitial = new Rol { Id = 1 };
+        private static Rol rolInitial = new Rol { NameRol = "RolPruebas" };
 
         [TestMethod()]
         public async Task T1CrearteAsyncTest()
         {
             var rol = new Rol();
-            rol.Id = rolInitial.Id;
+            rol.IdRol = rolInitial.IdRol;
             rol.NameRol = "Administrador";
             int result = await RolDAL.CrearteAsync(rol);
             Assert.AreNotEqual(0, result);
-            rolInitial.Id = rol.Id;
+            rolInitial.IdRol = rol.IdRol;
         }
 
         [TestMethod()]
         public async Task T2ModifyAsyncTest()
         {
             var rol = new Rol();
-            rol.Id = rolInitial.Id;
+            rol.IdRol = rolInitial.IdRol;
             rol.NameRol = "Admin";
             int result = await RolDAL.ModifyAsync(rol);
             Assert.AreNotEqual(0, result);
         }
 
         [TestMethod()]
-        public async Task T3GetByIdAsyncTest()
+        public async Task T3GetByIdRolAsyncTest()
         {
             var rol = new Rol();
-            rol.Id = rolInitial.Id;
+            rol.IdRol = rolInitial.IdRol;
             var result = await RolDAL.GetByIdAsync(rol);
-            Assert.AreEqual(rol.Id, result.Id);
+            Assert.AreEqual(rol.IdRol, result.IdRol);
         }
 
         [TestMethod()]
@@ -56,7 +56,7 @@ namespace SysTaimsal.DAL.Tests
         public async Task T5SearchAsyncTest()
         {
             var rol = new Rol();
-            rol.NameRol = "1";
+            rol.NameRol = "Admin";
             rol.Top_Aux = 10;
             var result = await RolDAL.SearchAsync(rol);
             Assert.AreNotEqual(0, result.Count);
@@ -66,7 +66,7 @@ namespace SysTaimsal.DAL.Tests
         public async Task T6DeleteAsyncTest()
         {
             var rol = new Rol();
-            rol.Id = rolInitial.Id;
+            rol.IdRol = rolInitial.IdRol;
             int result = await RolDAL.DeleteAsync(rol);
             Assert.AreNotEqual(0, result);
         }

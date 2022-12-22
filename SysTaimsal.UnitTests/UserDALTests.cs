@@ -86,7 +86,7 @@ namespace SysTaimsal.DAL.Tests
             var result = await UserDAL.SearchIncludeRolesAsync(user);
             Assert.AreNotEqual(0, result.Count);
             var lastUser = result.FirstOrDefault();
-            Assert.IsTrue(lastUser.Rol != null && user.IdRol == lastUser.Rol.Id);
+            Assert.IsTrue(lastUser.Rol != null && user.IdRol == lastUser.Rol.IdRol);
         }
 
         [TestMethod()]
