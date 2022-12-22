@@ -166,26 +166,26 @@ GO
 ALTER TABLE [Taimsal].[User] ADD FOREIGN KEY ([IdRol]) REFERENCES [Taimsal].[Rol] ([IdRol])
 GO
 
-ALTER TABLE [Taimsal].[Client] ADD FOREIGN KEY ([IdClient]) REFERENCES [Taimsal].[User] ([IdClient])
+ALTER TABLE [Taimsal].[User] ADD FOREIGN KEY ([IdClient]) REFERENCES [Taimsal].[Client] ([IdClient])
 GO
 
-ALTER TABLE [Taimsal].[Product] ADD FOREIGN KEY ([IdProduct]) REFERENCES [Taimsal].[User] ([IdProduct])
+ALTER TABLE [Taimsal].[User] ADD FOREIGN KEY ([IdProduct]) REFERENCES [Taimsal].[Product] ([IdProduct])
 GO
 
-ALTER TABLE [Taimsal].[Providers] ADD FOREIGN KEY ([IdProvider]) REFERENCES [Taimsal].[User] ([IdProvider])
+ALTER TABLE [Taimsal].[User] ADD FOREIGN KEY ([IdProvider]) REFERENCES [Taimsal].[Providers] ([IdProvider])
 GO
 
-ALTER TABLE [Taimsal].[Attendance] ADD FOREIGN KEY ([IdAttendance]) REFERENCES [Taimsal].[User] ([IdAttendance])
+ALTER TABLE [Taimsal].[User] ADD FOREIGN KEY ([IdAttendance]) REFERENCES [Taimsal].[Attendance] ([IdAttendance])
 GO
 
-ALTER TABLE [Taimsal].[Employee] ADD FOREIGN KEY ([IdEmployee]) REFERENCES [Taimsal].[User] ([IdEmployee])
+ALTER TABLE [Taimsal].[User] ADD FOREIGN KEY ([IdEmployee]) REFERENCES [Taimsal].[Employee] ([IdEmployee])
 GO
 
-ALTER TABLE [Taimsal].[Machine] ADD FOREIGN KEY ([IdMachine]) REFERENCES [Taimsal].[Providers] ([IdMachine])
+ALTER TABLE [Taimsal].[Providers] ADD FOREIGN KEY ([IdMachine]) REFERENCES [Taimsal].[Machine] ([IdMachine])
 GO
 
-ALTER TABLE [Taimsal].[Employee] ADD FOREIGN KEY ([IdEmployee]) REFERENCES [Taimsal].[Attendance] ([IdEmployee])
+ALTER TABLE [Taimsal].[Attendance] ADD FOREIGN KEY ([IdEmployee]) REFERENCES [Taimsal].[Employee] ([IdEmployee])
 GO
 
-ALTER TABLE [Taimsal].[Employee] ADD FOREIGN KEY ([IdMachine]) REFERENCES [Taimsal].[Machine] ([IdMachine])
+ALTER TABLE [Taimsal].[Machine] ADD FOREIGN KEY ([IdMachine]) REFERENCES [Taimsal].[Employee] ([IdMachine])
 GO
