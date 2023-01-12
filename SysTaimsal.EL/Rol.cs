@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SysTaimsal.EL
 {
+    [Table("Rol")]
     public partial class Rol
     {
-        public Rol(){
+        public Rol()
+        {
             users = new HashSet<User>();
         }
         [Key]
@@ -20,6 +17,7 @@ namespace SysTaimsal.EL
         public string NameRol { get; set; }
         [NotMapped]
         public int Top_Aux { get; set; }
+        [ForeignKey("Id")]
         public virtual ICollection<User> users { get; set; }
     }
 }

@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using SysTaimsal.EL;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
+using System.Diagnostics.Metrics;
 
 namespace SysTaimsal.DAL
 {
-    public  class CLientDAL
+    public class CLientDAL
     {
         public static async Task<int> CreateAsync(Client pClient)
         {
@@ -19,9 +21,7 @@ namespace SysTaimsal.DAL
                 result = await DBContext.SaveChangesAsync();
             }
             return result;
-
         }
-
         public static async Task<int> ModifyAsync(Client pClient)
         {
             int result = 0;
@@ -29,9 +29,9 @@ namespace SysTaimsal.DAL
             {
                 var client = await DbContext.Clients.FirstOrDefaultAsync(s => s.IdClient == pClient.IdClient);
                 client.NameClient = pClient.NameClient;
+                client.PhoneNumber = pClient.PhoneNumber;
                 DbContext.Update(client);
                 result = await DbContext.SaveChangesAsync();
-
             }
             return result;
         }

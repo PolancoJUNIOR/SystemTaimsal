@@ -1,24 +1,25 @@
-﻿using SysTaimsal.EL;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using SysTaimsal.EL;
 
 namespace SysTaimsal.DAL
 {
     public class ProductDAL
     {
-        public static async Task<int> CreateAsync(Product pProduct) { 
+        public static async Task<int> CrearteAsync(Product pProduct)
+        {
             int result = 0;
-            using (var DbContext = new SysTaimsalBDContext()) {
-                DbContext.Add(pProduct);
-                result = await DbContext.SaveChangesAsync();
+            using (var BDContext = new SysTaimsalBDContext())
+            {
+                BDContext.Add(pProduct);
+                result = await BDContext.SaveChangesAsync();
             }
             return result;
         }
-
         public static async Task<int> ModifyAsync(Product pProduct)
         {
             var result = 0;

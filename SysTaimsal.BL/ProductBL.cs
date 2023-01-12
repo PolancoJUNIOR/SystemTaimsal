@@ -12,7 +12,7 @@ namespace SysTaimsal.BL
     {
         public async Task<int> CreateAsync(Product pProduct)
         {
-            return await ProductDAL.CreateAsync(pProduct);
+            return await ProductDAL.CrearteAsync(pProduct);
         }
 
         public async Task<int> ModifyAsync(Product pProduct)

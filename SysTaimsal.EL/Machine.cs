@@ -10,10 +10,7 @@ namespace SysTaimsal.EL
 {
     public class Machine
     {
-        public Machine()
-        {
-            Employees = new HashSet<Employee>();
-        }
+        
         [Key]
         public int IdMachine { get; set; }
         [Required(ErrorMessage = "Nombre es obligatorio")]
@@ -23,7 +20,7 @@ namespace SysTaimsal.EL
         [NotMapped]
         public int Top_Aux { get; set; }
 
-        public virtual ICollection<Employee> Employees { get; set; }
+        public virtual Provider? Provider{ get; set; }
     }
 }
 

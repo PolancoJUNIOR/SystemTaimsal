@@ -8,22 +8,26 @@ using System.Threading.Tasks;
 
 namespace SysTaimsal.EL
 {
-    public class Product
+    [Table("Product")]
+    public partial class Product
     {
+   
         [Key]
         public int IdProduct { get; set; }
         [Required(ErrorMessage = "Nombre es obligatorio")]
         [StringLength(40, ErrorMessage = "Maximo 40 caracteres")]
-        [Display(Name ="Producto")]
+        [Display(Name = "Producto")]
         public string NameProduct { get; set; }
-        [Required(ErrorMessage ="Imagen necesaria")]
+        [Required(ErrorMessage = "Imagen necesaria")]
         public string ImageProduct { get; set; }
-        [StringLength(500, ErrorMessage ="Maximo 500 caracteres")]
+        [StringLength(500, ErrorMessage = "Maximo 500 caracteres")]
         public string? DescriptionProduct { get; set; }
-        [Required(ErrorMessage ="Precio es obligatorio")]
-        [Display(Name ="Precio")]
+        [Required(ErrorMessage = "Precio es obligatorio")]
+        [Display(Name = "Precio")]
         public decimal? Price { get; set; }
         [NotMapped]
         public int Top_Aux { get; set; }
+        [ForeignKey("IdReport")]
+        public virtual ICollection<Report> Reports { get; set; }
     }
 }

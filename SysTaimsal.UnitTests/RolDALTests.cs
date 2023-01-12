@@ -13,13 +13,12 @@ namespace SysTaimsal.DAL.Tests
     [TestClass()]
     public class RolDALTests
     {
-        private static Rol rolInitial = new Rol { NameRol = "RolPruebas" };
+        private static Rol rolInitial = new Rol { IdRol= 1, NameRol = "RolPruebas" };
 
         [TestMethod()]
         public async Task T1CrearteAsyncTest()
         {
             var rol = new Rol();
-            rol.IdRol = rolInitial.IdRol;
             rol.NameRol = "Administrador";
             int result = await RolDAL.CrearteAsync(rol);
             Assert.AreNotEqual(0, result);

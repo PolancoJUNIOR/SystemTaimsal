@@ -1,11 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SysTaimsal.DAL;
-using SysTaimsal.EL;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SysTaimsal.EL;
 
 namespace SysTaimsal.DAL.Tests
 {
@@ -18,8 +11,7 @@ namespace SysTaimsal.DAL.Tests
         public async Task T1CreateAsyncTest()
         {
             var provider = new Provider();
-            provider.IdProvider = providerInitial.IdProvider;
-            provider.NameProvider = "";
+            provider.NameProvider = "ProvidersPruebas";
             int result = await ProviderDAL.CreateAsync(provider);
             Assert.AreNotEqual(0, result);
             providerInitial.IdProvider = provider.IdProvider;

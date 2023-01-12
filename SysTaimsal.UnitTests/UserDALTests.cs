@@ -1,33 +1,27 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SysTaimsal.DAL;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SysTaimsal.EL;
+﻿using SysTaimsal.EL;
 namespace SysTaimsal.DAL.Tests
 {
     [TestClass()]
     public class UserDALTests
     {
-        private static User UserInitial = new User { Id = 1, IdRol = 1, Login = "RonaldUser", Password = "12345" };
+        private static User UserInitial = new User { Id = 1, IdRol = 1, IdReport = 1, Login = "RonaldUser", Password = "12345" };
         [TestMethod()]
         public async Task T1CreateAsyncTest()
         {
-            var User = new User();
-            User.IdRol = UserInitial.IdRol;
-            User.NameUser = "Ronald";
-            User.LastName = "Mejia";
-            User.Login = "RonaldUser";
+            var pUser = new User();
+            pUser.IdRol = UserInitial.IdRol;
+            pUser.IdReport = UserInitial.IdReport;
+            pUser.NameUser = "Ronald";
+            pUser.LastNameUser = "Mejia";
+            pUser.Login = "RonaldUser";
             string password = "12345";
-            User.Password = password;
-            User.StatusUser = (byte)Status_User.INACTIVO;
-            int resutl = await UserDAL.CreateAsync(User);
+            pUser.Password = password;
+            pUser.Status_User = (byte)Status_User.INACTIVO;
+            int resutl = await UserDAL.CreateAsync(pUser);
             Assert.AreNotEqual(0, resutl);
-            UserInitial.Id = User.Id;
+            UserInitial.Id = pUser.Id;
             UserInitial.Password = password;
-            UserInitial.Login = User.Login;
+            UserInitial.Login = pUser.Login;
         }
 
         [TestMethod()]
@@ -35,10 +29,9 @@ namespace SysTaimsal.DAL.Tests
         {
             var user = new User();
             user.Id = UserInitial.Id;
-            user.IdRol = UserInitial.IdRol;
             user.NameUser = "Ronald";
-            user.LastName = "Mejia";
-            user.StatusUser = (byte)Status_User.ACTIVO;
+            user.LastNameUser = "Mejiaa";
+            user.Status_User = (byte)Status_User.ACTIVO;
             int result  = await UserDAL.ModifyAsync(user);
             Assert.AreNotEqual(0, result);
             UserInitial.Login = user.Login;
@@ -66,9 +59,9 @@ namespace SysTaimsal.DAL.Tests
             var user = new User();
             user.IdRol = UserInitial.IdRol;
             user.NameUser = "A";
-            user.LastName = "a";
+            user.LastNameUser = "a";
             user.Login = "A";
-            user.StatusUser = (byte)Status_User.ACTIVO;
+            user.Status_User = (byte)Status_User.ACTIVO;
             user.Top_Aux = 10;
             var resultUser = await UserDAL.SearchAsync(user);
             Assert.AreNotEqual(0, resultUser.Count);
@@ -79,14 +72,14 @@ namespace SysTaimsal.DAL.Tests
             var user = new User();
             user.IdRol = UserInitial.IdRol;
             user.NameUser = "A";
-            user.LastName = "a";
+            user.LastNameUser = "a";
             user.Login = "A";
-            user.StatusUser = (byte)Status_User.ACTIVO;
+            user.Status_User = (byte)Status_User.ACTIVO;
             user.Top_Aux = 10;
             var result = await UserDAL.SearchIncludeRolesAsync(user);
             Assert.AreNotEqual(0, result.Count);
             var lastUser = result.FirstOrDefault();
-            Assert.IsTrue(lastUser.Rol != null && user.IdRol == lastUser.Rol.IdRol);
+            Assert.IsTrue(lastUser.IdRol != null && user.IdRol == lastUser.IdRol);
         }
 
         [TestMethod()]

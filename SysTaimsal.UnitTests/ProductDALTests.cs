@@ -14,22 +14,20 @@ namespace SysTaimsal.DAL.Tests
     {
         private static Product ProductInitial = new Product { IdProduct = 1, NameProduct = "Product One", ImageProduct = "...", DescriptionProduct = "Product One Lorem", Price = 10.00M };
         [TestMethod()]
-        public async void T1CreateAsyncTest()
+        public async Task T1CreateAsyncTest()
         {
             var product = new Product();
-            product.IdProduct = ProductInitial.IdProduct;
             product.NameProduct = ProductInitial.NameProduct;
             product.ImageProduct = ProductInitial.ImageProduct;
             product.DescriptionProduct = ProductInitial.DescriptionProduct;
             product.Price = ProductInitial.Price;
-            int result = await ProductDAL.CreateAsync(product);
-            Assert.AreEqual(0, result);
+            int result = await ProductDAL.CrearteAsync(product);
+            Assert.AreNotEqual(0, result);
             ProductInitial.IdProduct = product.IdProduct;
-            
         }
 
         [TestMethod()]
-        public async void T2ModifyAsyncTest()
+        public async Task T2ModifyAsyncTest()
         {
             var product = new Product();
             product.IdProduct = ProductInitial.IdProduct;
@@ -41,7 +39,7 @@ namespace SysTaimsal.DAL.Tests
         }
 
         [TestMethod()]
-        public async void T3GetByIdAsyncTest()
+        public async Task T3GetByIdAsyncTest()
         {
             var product = new Product();
             product.IdProduct = ProductInitial.IdProduct;
@@ -50,14 +48,14 @@ namespace SysTaimsal.DAL.Tests
         }
 
         [TestMethod()]
-        public async void T4GetAllAsyncTest()
+        public async Task T4GetAllAsyncTest()
         {
             var result = await ProductDAL.GetAllAsync();
             Assert.AreNotEqual(0, result.Count);
         }
 
         [TestMethod()]
-        public async void T5SearchAsyncTest()
+        public async Task T5SearchAsyncTest()
         {
             var product = new Product();
             product.NameProduct = "Product Two";
@@ -67,7 +65,7 @@ namespace SysTaimsal.DAL.Tests
         }
 
         [TestMethod()]
-        public async void T6DeleteAsyncTest()
+        public async Task T6DeleteAsyncTest()
         {
             var product = new Product();
             product.IdProduct = ProductInitial.IdProduct;

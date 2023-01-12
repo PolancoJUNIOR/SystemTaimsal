@@ -12,31 +12,32 @@ namespace SysTaimsal.DAL.Tests
     [TestClass()]
     public class CLientDALTests
     {
-        private static Client clientInitial = new Client { IdClient = 1};
+        private static Client clientInitial = new Client { IdClient = 78, NameClient = "Juanito Perez", PhoneNumber = "12345678" };
+
         [TestMethod()]
-        public async void T1CreateAsyncTest()
+        public async Task T1CreateAsyncTest()
         {
             var client = new Client();
-            client.IdClient = clientInitial.IdClient;
             client.NameClient = "Cliente1";
-            client.PhoneNumber = 12345;
+            client.PhoneNumber = "1234";
             int result = await CLientDAL.CreateAsync(client);
+            Assert.AreNotEqual(0, result);
             clientInitial.IdClient = client.IdClient;
         }
 
         [TestMethod()]
-        public async void T2ModifyAsyncTest()
+        public async Task T2ModifyAsyncTest()
         {
             var client = new Client();
             client.IdClient = clientInitial.IdClient;
-            client.NameClient = "Cliente1.1";
-            client.PhoneNumber = 2345;
+            client.NameClient = clientInitial.NameClient;
+            client.PhoneNumber = clientInitial.PhoneNumber;
             int result = await CLientDAL.ModifyAsync(client);
-            Assert.AreNotEqual(0, result);
+            Assert.AreNotEqual(result, 0);
         }
 
         [TestMethod()]
-        public async void T3GetByIdAsyncTest()
+        public async Task T3GetByIdAsyncTest()
         {
             var client = new Client();
             client.IdClient = clientInitial.IdClient;
@@ -45,14 +46,14 @@ namespace SysTaimsal.DAL.Tests
         }
 
         [TestMethod()]
-        public async void T4GetAllAsyncTest()
+        public async Task T4GetAllAsyncTest()
         {
             var result = await CLientDAL.GetAllAsync();
             Assert.AreNotEqual(0, result.Count);
         }
 
         [TestMethod()]
-        public async void T5SearchAsyncTest()
+        public async Task T5SearchAsyncTest()
         {
             var client = new Client();
             client.NameClient = "2";
@@ -62,7 +63,7 @@ namespace SysTaimsal.DAL.Tests
         }
 
         [TestMethod()]
-        public async void T6DeleteAsyncTest()
+        public async Task T6DeleteAsyncTest()
         {
             var client = new Client();
             client.IdClient = clientInitial.IdClient;

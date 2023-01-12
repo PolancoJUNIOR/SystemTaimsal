@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,8 +9,12 @@ using System.Threading.Tasks;
 
 namespace SysTaimsal.EL
 {
-    public  class Provider
-    {
+    public  partial class Provider
+    {   
+        public Provider() { 
+            Machines = new HashSet<Machine>();
+        }
+
         [Key]
         public int IdProvider { get; set; }
       
@@ -19,5 +24,8 @@ namespace SysTaimsal.EL
         public string? NameProvider { get; set; }
         [NotMapped]
         public int Top_Aux { get; set; }
+        public ICollection<Machine> Machines { get; set; }
+        [ForeignKey("IdReport")]
+        public virtual ICollection<Report> Reports { get; set; }
     }
 }
