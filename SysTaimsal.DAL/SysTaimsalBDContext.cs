@@ -36,11 +36,11 @@ namespace SysTaimsal.DAL
                 entity.HasKey(m => m.IdMachine)
                     .HasName("PK__Machine__Taimsal__001");
 
-                entity.HasOne(p => p.Provider)
-                    .WithMany(m => m.Machines)
-                    .HasForeignKey(p => p.IdMachine)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK1__Machine__Provider");
+                //entity.HasOne(p => p.Provider)
+                //    .WithMany(m => m.Machines)
+                //    .HasForeignKey(p => p.IdMachine)
+                //    .OnDelete(DeleteBehavior.ClientSetNull)
+                //    .HasConstraintName("FK1__Machine__Provider");
             });
 
             modelBuilder.Entity<Client>(entity =>
@@ -60,6 +60,12 @@ namespace SysTaimsal.DAL
             {
                 entity.HasKey(p => p.IdProvider)
                     .HasName("PK__Provider__Taimsal__001");
+
+                entity.HasOne(p => p.Machine)
+                    .WithMany(c => c.Providers)
+                    .HasForeignKey(c => c.IdProvider)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("PK__Provider__Machine");
 
                 //entity.HasOne(p => p.Report)
                 //    .WithMany(r => r.Providers)
@@ -124,10 +130,10 @@ namespace SysTaimsal.DAL
                     .HasConstraintName("FK1__Products__Report");
             });
 
-           
+
 
         }
 
-     
+
     }
 }

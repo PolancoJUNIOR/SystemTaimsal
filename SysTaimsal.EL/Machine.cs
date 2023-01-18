@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace SysTaimsal.EL
 {
+    [Table("Machine")]
     public class Machine
     {
         
@@ -19,8 +20,8 @@ namespace SysTaimsal.EL
         public string? ImageMachine { get; set; }
         [NotMapped]
         public int Top_Aux { get; set; }
-
-        public virtual Provider? Provider{ get; set; }
+        [ForeignKey("IdProvider")]
+        public virtual ICollection<Provider>Providers{ get; set; }
     }
 }
 

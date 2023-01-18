@@ -23,7 +23,7 @@ namespace SysTaimsal.DAL.Tests
             int result = await CLientDAL.CreateAsync(client);
             Assert.AreNotEqual(0, result);
             clientInitial.IdClient = client.IdClient;
-        }
+        }       
 
         [TestMethod()]
         public async Task T2ModifyAsyncTest()

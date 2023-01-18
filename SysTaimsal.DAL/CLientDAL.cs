@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SysTaimsal.EL;
+﻿using SysTaimsal.EL;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
-using System.Diagnostics.Metrics;
 
 namespace SysTaimsal.DAL
 {

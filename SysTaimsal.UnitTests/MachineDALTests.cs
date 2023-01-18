@@ -12,16 +12,16 @@ namespace SysTaimsal.DAL.Tests
     [TestClass()]
     public class MachineDALTests
     {
-        private static Machine MachineInitial = new Machine { IdMachine = 1, NameMachine = "MachineMachine", ImageMachine = "../wwwroot/img/Product/" };
+        private static Machine MachineInitial = new Machine { IdMachine = 18, NameMachine = "MachineMachine", ImageMachine = "../wwwroot/img/Product/" };
         [TestMethod()]
         public async Task T1CreateAsyncTest()
         {
             var machine = new Machine();
-            machine.IdMachine = MachineInitial.IdMachine;
-            machine.NameMachine = MachineInitial.NameMachine;
-            machine.ImageMachine = MachineInitial.ImageMachine;
+            machine.NameMachine = "Machine123";
+            machine.ImageMachine = "C/Taimsal/FrontEnd/WWWROOT/IMG/IMAGEN-BONITA.PNG";
             int result = await MachineDAL.CreateAsync(machine);
-            Assert.AreEqual(0, result);
+            Assert.AreNotEqual(0, result);
+            MachineInitial.IdMachine = machine.IdMachine;
         }
 
         [TestMethod()]

@@ -1,11 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SysTaimsal.EL;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 
 namespace SysTaimsal.DAL
 {
@@ -14,10 +8,10 @@ namespace SysTaimsal.DAL
         public static async Task<int> CreateAsync(Machine pMachine)
         {
             int result = 0;
-            using (var DbContext = new SysTaimsalBDContext())
+            using (var DBContext = new SysTaimsalBDContext())
             {
-                DbContext.Add(pMachine);
-                result = await DbContext.SaveChangesAsync();
+                DBContext.Add(pMachine);
+                result = await DBContext.SaveChangesAsync();
             }
             return result;
         }
