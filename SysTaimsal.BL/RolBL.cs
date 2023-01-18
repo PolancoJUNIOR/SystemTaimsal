@@ -23,7 +23,7 @@ namespace SysTaimsal.BL
         }
 
         public async Task<List<Rol>> GetAllAsync()
-        {
+        {   
             return await RolDAL.GetAllAsync();
         }
 
