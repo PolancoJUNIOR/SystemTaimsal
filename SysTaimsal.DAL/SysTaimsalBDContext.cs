@@ -20,7 +20,8 @@ namespace SysTaimsal.DAL
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"workstation id=DbSysTaimsalDev.mssql.somee.com;packet size=4096;user id=UserSysTaimsal_SQLLogin_1;pwd=6eebslpat7;data source=DbSysTaimsalDev.mssql.somee.com;persist security info=False;initial catalog=DbSysTaimsalDev ");
+            //Data Source=DESKTOP-NJIEQE0\SQLEXPRESS;Initial Catalog=DevTaimsalDB;persist security info=False;Integrated Security=True
+            optionsBuilder.UseSqlServer(@"workstation id=DbSysTaimsalDev.mssql.somee.com;packet size=4096;user id=UserSysTaimsal_SQLLogin_1;pwd=6eebslpat7;data source=DbSysTaimsalDev.mssql.somee.com;persist security info=False;initial catalog=DbSysTaimsalDev");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -35,25 +36,12 @@ namespace SysTaimsal.DAL
             {
                 entity.HasKey(m => m.IdMachine)
                     .HasName("PK__Machine__Taimsal__001");
-
-                //entity.HasOne(p => p.Provider)
-                //    .WithMany(m => m.Machines)
-                //    .HasForeignKey(p => p.IdMachine)
-                //    .OnDelete(DeleteBehavior.ClientSetNull)
-                //    .HasConstraintName("FK1__Machine__Provider");
             });
 
             modelBuilder.Entity<Client>(entity =>
             {
                 entity.HasKey(c => c.IdClient)
                     .HasName("PK__Client__Taimsal_001");
-
-                //entity.HasOne(d => d.Report)
-                //    .WithMany(c => c.Clients)
-                //    .HasForeignKey(c => c.IdClient)
-                //    .OnDelete(DeleteBehavior.ClientSetNull)
-                //    .HasConstraintName("FK1__Client__Report");
-
             });
 
             modelBuilder.Entity<Provider>(entity =>
@@ -66,12 +54,6 @@ namespace SysTaimsal.DAL
                     .HasForeignKey(c => c.IdProvider)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("PK__Provider__Machine");
-
-                //entity.HasOne(p => p.Report)
-                //    .WithMany(r => r.Providers)
-                //    .HasForeignKey("PK__Providers__Report")
-                //    .OnDelete(DeleteBehavior.ClientSetNull)
-                //    .HasConstraintName("FK1__Providers__Report");
             });
 
             modelBuilder.Entity<User>(entity =>
@@ -79,26 +61,20 @@ namespace SysTaimsal.DAL
                 entity.HasKey(u => u.Id)
                     .HasName("PK__User__Taimsal__001");
 
-                //entity.HasOne(r => r.Report)
-                //    .WithMany(u => u.users)
-                //    .HasForeignKey(u => u.IdReport)
-                //    .OnDelete(DeleteBehavior.ClientSetNull)
-                //    .HasConstraintName("FK1__User__Report");
+                entity.Property(e => e.Password).IsFixedLength();
+
+                entity.HasOne(u => u.Rol)
+                    .WithMany(r => r.users)
+                    .HasForeignKey(r => r.Id)
+                    .HasConstraintName("FK1__Rol__User__001")
+                    .OnDelete(DeleteBehavior.ClientNoAction);
             });
 
             modelBuilder.Entity<Product>(entity =>
             {
                 entity.HasKey(p => p.IdProduct)
                     .HasName("PK__Product__Taimsal_001");
-
-                //entity.HasOne(p => p.Report)
-                //    .WithMany(r => r.Products)
-                //    .HasForeignKey(r => r.IdProduct)
-                //    .OnDelete(DeleteBehavior.ClientSetNull)
-                //    .HasConstraintName("FK1__Products__Report");
             });
-
-
 
             modelBuilder.Entity<Report>(entity =>
             {
@@ -109,31 +85,26 @@ namespace SysTaimsal.DAL
                     .WithMany(r => r.Reports)
                     .HasForeignKey(r => r.IdReport)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK1__Users__Report");
+                    .HasConstraintName("FK1__User__Report");
 
                 entity.HasOne(e => e.Client)
                     .WithMany(r => r.Reports)
                     .HasForeignKey(r => r.IdReport)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK1__Clients__Report");
+                    .HasConstraintName("FK2__Clients__Report");
 
                 entity.HasOne(e => e.Provider)
-                    .WithMany(p => p.Reports)
-                    .HasForeignKey(p => p.IdReport)
+                    .WithMany(r => r.Reports)
+                    .HasForeignKey(r => r.IdReport)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK1__Providers__Report");
-
+                    .HasConstraintName("FK3__Provider__Report__001");
+                    
                 entity.HasOne(e => e.Product)
                     .WithMany(p => p.Reports)
                     .HasForeignKey(p => p.IdReport)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK1__Products__Report");
+                    .HasConstraintName("FK4__Products__Report");
             });
-
-
-
         }
-
-
     }
 }

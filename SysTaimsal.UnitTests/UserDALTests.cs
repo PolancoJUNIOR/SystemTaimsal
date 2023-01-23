@@ -4,13 +4,13 @@ namespace SysTaimsal.DAL.Tests
     [TestClass()]
     public class UserDALTests
     {
-        private static User UserInitial = new User { Id = 1, IdRol = 1, IdReport = 1, Login = "RonaldUser", Password = "12345" };
+        private static User UserInitial = new User { Id = 1, IdRol = 1, Login = "RonaldUser", Password = "12345" };
         [TestMethod()]
         public async Task T1CreateAsyncTest()
         {
             var pUser = new User();
             pUser.IdRol = UserInitial.IdRol;
-            pUser.IdReport = UserInitial.IdReport;
+            //pUser.IdReport = UserInitial.IdReport;
             pUser.NameUser = "Ronald";
             pUser.LastNameUser = "Mejia";
             pUser.Login = "RonaldUser";

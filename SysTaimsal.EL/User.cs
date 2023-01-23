@@ -16,12 +16,8 @@ namespace SysTaimsal.EL
         [Key]
         public int Id { get; set; }
 
-        [ForeignKey("Rol")]
         [Required(ErrorMessage = "Rol es obligatorio")]
         public int? IdRol { get; set; }
-
-        [ForeignKey("Report")]
-        public int IdReport { get; set; }
         [Required(ErrorMessage = "Nombre es obligatorio")]
         [StringLength(30, ErrorMessage = "Maximo 30 caracteres")]
         public string NameUser { get; set; }
@@ -44,8 +40,8 @@ namespace SysTaimsal.EL
         
         [Display(Name = "Fecha registro")]
         public DateTime RegistrationUser { get; set; }
-
-        public virtual Rol Rol { get; set; }
+        [ForeignKey("IdRol")]
+        public virtual Rol? Rol { get; set; }
 
         [ForeignKey("IdReport")]
         public virtual ICollection<Report> Reports { get; set; }

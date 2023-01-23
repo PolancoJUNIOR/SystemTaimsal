@@ -23,35 +23,24 @@ namespace SysTaimsal.EL
 
         [Key]
         public int IdReport { get; set; }
-
-
         public int IdClient { get; set; }
-        //[ForeignKey("IdProduct")]
         public int? IdProduct { get; set; }
-        //[ForeignKey("IdProvider")]
         public int? IdProvider { get; set; }
-
+        public int? Id { get; set; }
         [NotMapped]
         public int Top_Aux { get; set; }
+        
         [ForeignKey("Id")]
-        public virtual User user { get; set; }
+        public virtual User? user { get; set; }
+        
         [ForeignKey("IdClient")]
-        public virtual Client Client { get; set; }
+        public virtual Client? Client { get; set; }
 
         [ForeignKey("IdProduct")]
-        public virtual Product Product{ get; set; } 
+        public virtual Product? Product{ get; set; } 
 
         [ForeignKey("IdProvider")]
-        public virtual Provider Provider{ get; set; }
+        public virtual Provider? Provider{ get; set; }
 
-
-        //[InverseProperty("Product")]
-        //public virtual ICollection<Product>? IdProductNavigation { get; set; }
-
-
-        //[InverseProperty("Provider")]
-        //public virtual ICollection<Provider>? IdProviderNavigation { get; set; }
-
-        //public virtual ICollection<Machine>? IdMachineNavigation { get; set; }
     }
 }

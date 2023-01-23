@@ -12,8 +12,8 @@ using SysTaimsal.DAL;
 namespace SysTaimsal.DAL.Migrations
 {
     [DbContext(typeof(SysTaimsalBDContext))]
-    [Migration("20221126164012_InitialMigrationTaimsal")]
-    partial class InitialMigrationTaimsal
+    [Migration("20230122214736_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,33 +23,6 @@ namespace SysTaimsal.DAL.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("SysTaimsal.EL.Attendance", b =>
-                {
-                    b.Property<int>("IdAttendance")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdAttendance"), 1L, 1);
-
-                    b.Property<TimeSpan?>("CheckInTime")
-                        .HasColumnType("time");
-
-                    b.Property<DateTime?>("DayAttendence")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("IdEmployee")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("IdEmployeeNavigationIdEmployee")
-                        .HasColumnType("int");
-
-                    b.HasKey("IdAttendance");
-
-                    b.HasIndex("IdEmployeeNavigationIdEmployee");
-
-                    b.ToTable("Attendances");
-                });
 
             modelBuilder.Entity("SysTaimsal.EL.Client", b =>
                 {
@@ -61,56 +34,18 @@ namespace SysTaimsal.DAL.Migrations
 
                     b.Property<string>("NameClient")
                         .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
 
-                    b.Property<int>("PhoneNumber")
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
                         .HasMaxLength(10)
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(10)");
 
-                    b.HasKey("IdClient");
+                    b.HasKey("IdClient")
+                        .HasName("PK__Client__Taimsal_001");
 
-                    b.ToTable("Clients");
-                });
-
-            modelBuilder.Entity("SysTaimsal.EL.Employee", b =>
-                {
-                    b.Property<int>("IdEmployee")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdEmployee"), 1L, 1);
-
-                    b.Property<int?>("IdMachine")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("IdMachineNavigationIdMachine")
-                        .HasColumnType("int");
-
-                    b.Property<string>("LastNameEmployee")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
-                    b.Property<string>("NameEmployee")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
-                    b.Property<string>("Rol")
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("IdEmployee");
-
-                    b.HasIndex("IdMachineNavigationIdMachine");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Employees");
+                    b.ToTable("Client");
                 });
 
             modelBuilder.Entity("SysTaimsal.EL.Machine", b =>
@@ -129,9 +64,10 @@ namespace SysTaimsal.DAL.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.HasKey("IdMachine");
+                    b.HasKey("IdMachine")
+                        .HasName("PK__Machine__Taimsal__001");
 
-                    b.ToTable("Machines");
+                    b.ToTable("Machine");
                 });
 
             modelBuilder.Entity("SysTaimsal.EL.Product", b =>
@@ -159,43 +95,66 @@ namespace SysTaimsal.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("IdProduct");
+                    b.HasKey("IdProduct")
+                        .HasName("PK__Product__Taimsal_001");
 
-                    b.ToTable("Products");
+                    b.ToTable("Product");
                 });
 
             modelBuilder.Entity("SysTaimsal.EL.Provider", b =>
                 {
                     b.Property<int>("IdProvider")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdProvider"), 1L, 1);
 
                     b.Property<string>("NameProvider")
                         .IsRequired()
                         .HasMaxLength(40)
                         .HasColumnType("nvarchar(40)");
 
-                    b.HasKey("IdProvider");
+                    b.HasKey("IdProvider")
+                        .HasName("PK__Provider__Taimsal__001");
 
                     b.ToTable("Providers");
                 });
 
+            modelBuilder.Entity("SysTaimsal.EL.Report", b =>
+                {
+                    b.Property<int>("IdReport")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdClient")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("IdProduct")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("IdProvider")
+                        .HasColumnType("int");
+
+                    b.HasKey("IdReport")
+                        .HasName("PK__Report__001");
+
+                    b.ToTable("Report");
+                });
+
             modelBuilder.Entity("SysTaimsal.EL.Rol", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("IdRol")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdRol"), 1L, 1);
 
                     b.Property<string>("NameRol")
                         .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.HasKey("Id");
+                    b.HasKey("IdRol")
+                        .HasName("PK__Rol__TaimsalDev_001");
 
                     b.ToTable("Rol");
                 });
@@ -203,19 +162,13 @@ namespace SysTaimsal.DAL.Migrations
             modelBuilder.Entity("SysTaimsal.EL.User", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int?>("Employee")
+                    b.Property<int?>("IdRol")
                         .IsRequired()
                         .HasColumnType("int");
 
-                    b.Property<int>("IdRol")
-                        .HasColumnType("int");
-
-                    b.Property<string>("LastName")
+                    b.Property<string>("LastNameUser")
                         .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
@@ -233,57 +186,97 @@ namespace SysTaimsal.DAL.Migrations
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasMaxLength(32)
-                        .HasColumnType("nvarchar(32)");
+                        .HasColumnType("nchar(32)")
+                        .IsFixedLength();
 
-                    b.Property<DateTime>("RegistrationDate")
+                    b.Property<DateTime>("RegistrationUser")
                         .HasColumnType("datetime2");
 
-                    b.Property<byte>("StatusUser")
+                    b.Property<byte>("Status_User")
                         .HasColumnType("tinyint");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("PK__User__Taimsal__001");
 
-                    b.HasIndex("IdRol");
-
-                    b.ToTable("Users");
+                    b.ToTable("User");
                 });
 
-            modelBuilder.Entity("SysTaimsal.EL.Attendance", b =>
+            modelBuilder.Entity("SysTaimsal.EL.Provider", b =>
                 {
-                    b.HasOne("SysTaimsal.EL.Employee", "IdEmployeeNavigation")
-                        .WithMany()
-                        .HasForeignKey("IdEmployeeNavigationIdEmployee");
+                    b.HasOne("SysTaimsal.EL.Machine", "Machine")
+                        .WithMany("Providers")
+                        .HasForeignKey("IdProvider")
+                        .IsRequired()
+                        .HasConstraintName("PK__Provider__Machine");
 
-                    b.Navigation("IdEmployeeNavigation");
+                    b.Navigation("Machine");
                 });
 
-            modelBuilder.Entity("SysTaimsal.EL.Employee", b =>
+            modelBuilder.Entity("SysTaimsal.EL.Report", b =>
                 {
-                    b.HasOne("SysTaimsal.EL.Machine", "IdMachineNavigation")
-                        .WithMany("Employees")
-                        .HasForeignKey("IdMachineNavigationIdMachine");
+                    b.HasOne("SysTaimsal.EL.User", "user")
+                        .WithMany("Reports")
+                        .HasForeignKey("IdReport")
+                        .IsRequired()
+                        .HasConstraintName("FK1__User__Report");
 
-                    b.HasOne("SysTaimsal.EL.User", null)
-                        .WithMany("Employees")
-                        .HasForeignKey("UserId");
+                    b.HasOne("SysTaimsal.EL.Client", "Client")
+                        .WithMany("Reports")
+                        .HasForeignKey("IdReport")
+                        .IsRequired()
+                        .HasConstraintName("FK2__Clients__Report");
 
-                    b.Navigation("IdMachineNavigation");
+                    b.HasOne("SysTaimsal.EL.Product", "Product")
+                        .WithMany("Reports")
+                        .HasForeignKey("IdReport")
+                        .IsRequired()
+                        .HasConstraintName("FK4__Products__Report");
+
+                    b.HasOne("SysTaimsal.EL.Provider", "Provider")
+                        .WithMany("Reports")
+                        .HasForeignKey("IdReport")
+                        .IsRequired()
+                        .HasConstraintName("FK3__Provider__Report__001");
+
+                    b.Navigation("Client");
+
+                    b.Navigation("Product");
+
+                    b.Navigation("Provider");
+
+                    b.Navigation("user");
                 });
 
             modelBuilder.Entity("SysTaimsal.EL.User", b =>
                 {
                     b.HasOne("SysTaimsal.EL.Rol", "Rol")
                         .WithMany("users")
-                        .HasForeignKey("IdRol")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.ClientNoAction)
+                        .IsRequired()
+                        .HasConstraintName("FK1__Rol__User__001");
 
                     b.Navigation("Rol");
                 });
 
+            modelBuilder.Entity("SysTaimsal.EL.Client", b =>
+                {
+                    b.Navigation("Reports");
+                });
+
             modelBuilder.Entity("SysTaimsal.EL.Machine", b =>
                 {
-                    b.Navigation("Employees");
+                    b.Navigation("Providers");
+                });
+
+            modelBuilder.Entity("SysTaimsal.EL.Product", b =>
+                {
+                    b.Navigation("Reports");
+                });
+
+            modelBuilder.Entity("SysTaimsal.EL.Provider", b =>
+                {
+                    b.Navigation("Reports");
                 });
 
             modelBuilder.Entity("SysTaimsal.EL.Rol", b =>
@@ -293,7 +286,7 @@ namespace SysTaimsal.DAL.Migrations
 
             modelBuilder.Entity("SysTaimsal.EL.User", b =>
                 {
-                    b.Navigation("Employees");
+                    b.Navigation("Reports");
                 });
 #pragma warning restore 612, 618
         }
