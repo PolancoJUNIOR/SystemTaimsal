@@ -63,8 +63,6 @@ namespace SysTaimsal.DAL
                 pQuery = pQuery.Where(s => s.IdProvider == pReport.IdProvider);
             if (pReport.Id > 0)
                 pQuery = pQuery.Where(s => s.Id == pReport.Id);
-            //if (pReport.IdMachine > 0)
-            //    pQuery = pQuery.Where(s => s.IdMachine == pReport.IdMachine);
             if (pReport.Top_Aux > 0)
                 pQuery = pQuery.Take(pReport.Top_Aux).AsQueryable();
             return pQuery;
