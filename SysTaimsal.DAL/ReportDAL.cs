@@ -21,11 +21,11 @@ namespace SysTaimsal.DAL
             using (var BDContext = new SysTaimsalBDContext())
             {
                 var report = await BDContext.Reports.FirstOrDefaultAsync(s => s.IdReport == pReport.IdReport);
-                report.IdReport = pReport.IdReport;
                 report.Id = pReport.Id;
                 report.IdProduct = pReport.IdProduct;
                 report.IdProvider = pReport.IdProvider;
                 report.IdClient = pReport.IdClient;
+                report.IdMachine = pReport.IdMachine;
                 BDContext.Update(report);
                 result = await BDContext.SaveChangesAsync();
             }
@@ -61,6 +61,8 @@ namespace SysTaimsal.DAL
                 pQuery = pQuery.Where(s => s.IdProduct == pReport.IdProduct);
             if (pReport.IdProvider > 0)
                 pQuery = pQuery.Where(s => s.IdProvider == pReport.IdProvider);
+            if(pReport.IdMachine > 0)
+                pQuery = pQuery.Where(s => s.IdMachine == pReport.IdMachine);
             if (pReport.Id > 0)
                 pQuery = pQuery.Where(s => s.Id == pReport.Id);
             if (pReport.Top_Aux > 0)
@@ -115,18 +117,6 @@ namespace SysTaimsal.DAL
             }
             return Reports;
         }
-
-        //public static async Task<List<Report>> SearchIncludeMachinesAsync(Report pReport)
-        //{
-        //    var Reports = new List<Report>();
-        //    using (var BDContext = new SysTaimsalBDContext())
-        //    {
-        //        var select = BDContext.Reports.AsQueryable();
-        //        select = QuerySelect(select, pReport).Include(s => s.IdMachine).AsQueryable();
-        //        Reports = await select.ToListAsync();
-        //    }
-        //    return Reports;
-        //}
 
     }
 }

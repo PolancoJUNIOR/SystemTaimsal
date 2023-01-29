@@ -12,7 +12,7 @@ namespace SysTaimsal.DAL.Tests
     [TestClass()]
     public class ReportDALTests
     {
-        private static Report reportInitial = new Report { IdReport = 1, IdClient = 1, Id = 1, IdProduct = 1, IdProvider = 1 };
+        private static Report reportInitial = new Report { IdReport = 1, IdClient = 1, Id = 1, IdMachine=1, IdProduct = 1, IdProvider = 1 };
         [TestMethod()]
         public async Task T1CrearteAsyncTest()
         {
@@ -21,6 +21,7 @@ namespace SysTaimsal.DAL.Tests
             report.IdClient = reportInitial.IdClient;
             report.IdProduct = reportInitial.IdProduct;
             report.IdProvider = reportInitial.IdProvider;
+            report.IdMachine = reportInitial.IdMachine;
             int result = await ReportDAL.CrearteAsync(report);
             Assert.AreNotEqual(0, result);
             reportInitial.IdReport = report.IdReport;

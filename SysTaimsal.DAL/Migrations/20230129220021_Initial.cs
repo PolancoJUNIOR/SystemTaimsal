@@ -54,6 +54,19 @@ namespace SysTaimsal.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Providers",
+                columns: table => new
+                {
+                    IdProvider = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NameProvider = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK__Provider__Taimsal__001", x => x.IdProvider);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Rol",
                 columns: table => new
                 {
@@ -67,27 +80,11 @@ namespace SysTaimsal.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Providers",
+                name: "UserDev",
                 columns: table => new
                 {
-                    IdProvider = table.Column<int>(type: "int", nullable: false),
-                    NameProvider = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK__Provider__Taimsal__001", x => x.IdProvider);
-                    table.ForeignKey(
-                        name: "PK__Provider__Machine",
-                        column: x => x.IdProvider,
-                        principalTable: "Machine",
-                        principalColumn: "IdMachine");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "User",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                           .Annotation("SqlServer:Identity", "1, 1"),
                     IdRol = table.Column<int>(type: "int", nullable: false),
                     NameUser = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     LastNameUser = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
@@ -110,10 +107,12 @@ namespace SysTaimsal.DAL.Migrations
                 name: "Report",
                 columns: table => new
                 {
-                    IdReport = table.Column<int>(type: "int", nullable: false),
+                    IdReport = table.Column<int>(type: "int", nullable: false)
+                           .Annotation("SqlServer:Identity", "1, 1"),
                     IdClient = table.Column<int>(type: "int", nullable: false),
                     IdProduct = table.Column<int>(type: "int", nullable: true),
                     IdProvider = table.Column<int>(type: "int", nullable: true),
+                    IdMachine = table.Column<int>(type: "int", nullable: true),
                     Id = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -122,7 +121,7 @@ namespace SysTaimsal.DAL.Migrations
                     table.ForeignKey(
                         name: "FK1__User__Report",
                         column: x => x.IdReport,
-                        principalTable: "User",
+                        principalTable: "UserDev",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK2__Clients__Report",
@@ -139,6 +138,11 @@ namespace SysTaimsal.DAL.Migrations
                         column: x => x.IdReport,
                         principalTable: "Product",
                         principalColumn: "IdProduct");
+                    table.ForeignKey(
+                        name: "FK5_Machine__Report__001",
+                        column: x => x.IdReport,
+                        principalTable: "Machine",
+                        principalColumn: "IdMachine");
                 });
         }
 
@@ -148,7 +152,7 @@ namespace SysTaimsal.DAL.Migrations
                 name: "Report");
 
             migrationBuilder.DropTable(
-                name: "User");
+                name: "UserDev");
 
             migrationBuilder.DropTable(
                 name: "Client");
@@ -160,10 +164,10 @@ namespace SysTaimsal.DAL.Migrations
                 name: "Product");
 
             migrationBuilder.DropTable(
-                name: "Rol");
+                name: "Machine");
 
             migrationBuilder.DropTable(
-                name: "Machine");
+                name: "Rol");
         }
     }
 }

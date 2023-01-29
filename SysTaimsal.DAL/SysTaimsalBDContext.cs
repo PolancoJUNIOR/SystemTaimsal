@@ -20,8 +20,8 @@ namespace SysTaimsal.DAL
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //Data Source=DESKTOP-NJIEQE0\SQLEXPRESS;Initial Catalog=DevTaimsalDB;persist security info=False;Integrated Security=True
-            optionsBuilder.UseSqlServer(@"workstation id=DbSysTaimsalDev.mssql.somee.com;packet size=4096;user id=UserSysTaimsal_SQLLogin_1;pwd=6eebslpat7;data source=DbSysTaimsalDev.mssql.somee.com;persist security info=False;initial catalog=DbSysTaimsalDev");
+            optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-NJIEQE0\SQLEXPRESS;Initial Catalog=DevTaimsalDB;persist security info=False;Integrated Security=True");
+            //optionsBuilder.UseSqlServer(@"workstation id=DbSysTaimsalDev.mssql.somee.com;packet size=4096;user id=UserSysTaimsal_SQLLogin_1;pwd=6eebslpat7;data source=DbSysTaimsalDev.mssql.somee.com;persist security info=False;initial catalog=DbSysTaimsalDev");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -49,11 +49,6 @@ namespace SysTaimsal.DAL
                 entity.HasKey(p => p.IdProvider)
                     .HasName("PK__Provider__Taimsal__001");
 
-                entity.HasOne(p => p.Machine)
-                    .WithMany(c => c.Providers)
-                    .HasForeignKey(c => c.IdProvider)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("PK__Provider__Machine");
             });
 
             modelBuilder.Entity<User>(entity =>
@@ -104,6 +99,14 @@ namespace SysTaimsal.DAL
                     .HasForeignKey(p => p.IdReport)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK4__Products__Report");
+
+
+                entity.HasOne(p => p.Machine)
+                    .WithMany(c => c.Reports)
+                    .HasForeignKey(c => c.IdReport)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK5_Machine__Report__001");
+
             });
         }
     }

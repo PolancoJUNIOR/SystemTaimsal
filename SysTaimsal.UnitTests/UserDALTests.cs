@@ -6,11 +6,13 @@ namespace SysTaimsal.DAL.Tests
     {
         private static User UserInitial = new User { Id = 1, IdRol = 1, Login = "RonaldUser", Password = "12345" };
         [TestMethod()]
+
+        
+
         public async Task T1CreateAsyncTest()
         {
             var pUser = new User();
-            pUser.IdRol = UserInitial.IdRol;
-            //pUser.IdReport = UserInitial.IdReport;
+            pUser.IdRol = 2;
             pUser.NameUser = "Ronald";
             pUser.LastNameUser = "Mejia";
             pUser.Login = "RonaldUser";

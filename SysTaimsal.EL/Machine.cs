@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SysTaimsal.EL
 {
     [Table("Machine")]
     public class Machine
     {
-        
         [Key]
         public int IdMachine { get; set; }
         [Required(ErrorMessage = "Nombre es obligatorio")]
@@ -19,9 +13,9 @@ namespace SysTaimsal.EL
         public string NameMachine { get; set; }
         public string? ImageMachine { get; set; }
         [NotMapped]
-        public int Top_Aux { get; set; }
-        [ForeignKey("IdProvider")]
-        public virtual ICollection<Provider>Providers{ get; set; }
+        public int Top_Aux { get; set; }    
+        [ForeignKey("IdReport")]
+        public virtual ICollection<Report> Reports { get; set; }
     }
 }
 

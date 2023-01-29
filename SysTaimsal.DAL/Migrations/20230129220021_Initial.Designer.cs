@@ -12,7 +12,7 @@ using SysTaimsal.DAL;
 namespace SysTaimsal.DAL.Migrations
 {
     [DbContext(typeof(SysTaimsalBDContext))]
-    [Migration("20230122214736_Initial")]
+    [Migration("20230129220021_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -104,7 +104,10 @@ namespace SysTaimsal.DAL.Migrations
             modelBuilder.Entity("SysTaimsal.EL.Provider", b =>
                 {
                     b.Property<int>("IdProvider")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdProvider"), 1L, 1);
 
                     b.Property<string>("NameProvider")
                         .IsRequired()
@@ -120,12 +123,16 @@ namespace SysTaimsal.DAL.Migrations
             modelBuilder.Entity("SysTaimsal.EL.Report", b =>
                 {
                     b.Property<int>("IdReport")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     b.Property<int?>("Id")
                         .HasColumnType("int");
 
                     b.Property<int>("IdClient")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("IdMachine")
                         .HasColumnType("int");
 
                     b.Property<int?>("IdProduct")
@@ -162,6 +169,7 @@ namespace SysTaimsal.DAL.Migrations
             modelBuilder.Entity("SysTaimsal.EL.User", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     b.Property<int?>("IdRol")
@@ -198,18 +206,7 @@ namespace SysTaimsal.DAL.Migrations
                     b.HasKey("Id")
                         .HasName("PK__User__Taimsal__001");
 
-                    b.ToTable("User");
-                });
-
-            modelBuilder.Entity("SysTaimsal.EL.Provider", b =>
-                {
-                    b.HasOne("SysTaimsal.EL.Machine", "Machine")
-                        .WithMany("Providers")
-                        .HasForeignKey("IdProvider")
-                        .IsRequired()
-                        .HasConstraintName("PK__Provider__Machine");
-
-                    b.Navigation("Machine");
+                    b.ToTable("UserDev");
                 });
 
             modelBuilder.Entity("SysTaimsal.EL.Report", b =>
@@ -226,6 +223,12 @@ namespace SysTaimsal.DAL.Migrations
                         .IsRequired()
                         .HasConstraintName("FK2__Clients__Report");
 
+                    b.HasOne("SysTaimsal.EL.Machine", "Machine")
+                        .WithMany("Reports")
+                        .HasForeignKey("IdReport")
+                        .IsRequired()
+                        .HasConstraintName("FK5_Machine__Report__001");
+
                     b.HasOne("SysTaimsal.EL.Product", "Product")
                         .WithMany("Reports")
                         .HasForeignKey("IdReport")
@@ -239,6 +242,8 @@ namespace SysTaimsal.DAL.Migrations
                         .HasConstraintName("FK3__Provider__Report__001");
 
                     b.Navigation("Client");
+
+                    b.Navigation("Machine");
 
                     b.Navigation("Product");
 
@@ -266,7 +271,7 @@ namespace SysTaimsal.DAL.Migrations
 
             modelBuilder.Entity("SysTaimsal.EL.Machine", b =>
                 {
-                    b.Navigation("Providers");
+                    b.Navigation("Reports");
                 });
 
             modelBuilder.Entity("SysTaimsal.EL.Product", b =>

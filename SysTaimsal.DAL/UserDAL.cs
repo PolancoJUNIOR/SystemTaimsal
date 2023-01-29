@@ -13,6 +13,7 @@ namespace SysTaimsal.DAL
 {
     public class UserDAL
     {
+
         private static void EncriptarMD5(User pUser)
         {
             using (var md5 = MD5.Create())
@@ -42,6 +43,7 @@ namespace SysTaimsal.DAL
                 bool existeLogin = await ExistLogin(pUser, BDContext);
                 if (existeLogin == false)
                 {
+
                     pUser.RegistrationUser = DateTime.Now;
                     EncriptarMD5(pUser);
                     BDContext.Add(pUser);
@@ -52,6 +54,8 @@ namespace SysTaimsal.DAL
             }
             return result;
         }
+     
+        
         public static async Task<int> ModifyAsync(User pUser)
         {
             int result = 0;
@@ -62,7 +66,6 @@ namespace SysTaimsal.DAL
                 {
                     var user = await BDContext.User.FirstOrDefaultAsync(s => s.Id == pUser.Id);
                     user.IdRol = pUser.IdRol;
-                    //user.IdReport = pUser.IdReport;
                     user.NameUser = pUser.NameUser;
                     user.LastNameUser = pUser.LastNameUser;
                     user.Login = pUser.Login;

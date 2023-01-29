@@ -6,10 +6,10 @@ namespace SysTaimsal.EL
     [Table("Rol")]
     public partial class Rol
     {
-        public Rol()
-        {
+        public Rol() {
             users = new HashSet<User>();
         }
+
         [Key]
         public int IdRol { get; set; }
         [Required(ErrorMessage = "Nombre es obligatorio")]

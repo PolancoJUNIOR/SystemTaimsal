@@ -20,7 +20,6 @@ namespace SysTaimsal.EL
         public string? NameProvider { get; set; }
         [NotMapped]
         public int Top_Aux { get; set; }
-        public virtual Machine? Machine { get; set; }
         [ForeignKey("IdReport")]
         public virtual ICollection<Report> Reports { get; set; }
     }

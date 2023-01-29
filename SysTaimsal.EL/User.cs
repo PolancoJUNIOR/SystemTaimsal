@@ -5,14 +5,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using Microsoft.EntityFrameworkCore;
 
 namespace SysTaimsal.EL
 {
-    [Table("User")]
+    [Table("UserDev")]
     public class User
     {
-      
+     
         [Key]
         public int Id { get; set; }
 
