@@ -4,7 +4,7 @@ namespace SysTaimsal.DAL.Tests
     [TestClass()]
     public class UserDALTests
     {
-        private static User UserInitial = new User { Id = 1, IdRol = 1, Login = "RonaldUser", Password = "12345" };
+        private static User UserInitial = new User { IdUser = 1, IdRol = 1, Login = "RonaldUser", Password = "12345" };
         [TestMethod()]
 
         
@@ -21,7 +21,7 @@ namespace SysTaimsal.DAL.Tests
             pUser.Status_User = (byte)Status_User.INACTIVO;
             int resutl = await UserDAL.CreateAsync(pUser);
             Assert.AreNotEqual(0, resutl);
-            UserInitial.Id = pUser.Id;
+            UserInitial.IdUser = pUser.IdUser;
             UserInitial.Password = password;
             UserInitial.Login = pUser.Login;
         }
@@ -30,7 +30,7 @@ namespace SysTaimsal.DAL.Tests
         public async Task T2ModifyAsyncTest()
         {
             var user = new User();
-            user.Id = UserInitial.Id;
+            user.IdUser = UserInitial.IdUser;
             user.NameUser = "Ronald";
             user.LastNameUser = "Mejiaa";
             user.Status_User = (byte)Status_User.ACTIVO;
@@ -43,9 +43,9 @@ namespace SysTaimsal.DAL.Tests
         public async Task T3GetByIdAsyncTest()
         {
             var user = new User();
-            user.Id = UserInitial.Id;
+            user.IdUser = UserInitial.IdUser;
             var resulUser = await UserDAL.GetByIdAsync(user);
-            Assert.AreEqual(user.Id, resulUser.Id);
+            Assert.AreEqual(user.IdUser, resulUser.IdUser);
         }
 
         [TestMethod()]
@@ -88,7 +88,7 @@ namespace SysTaimsal.DAL.Tests
         public async Task T7ChangePasswordAsyncTest()
         {
             var user = new User();
-            user.Id = UserInitial.Id;
+            user.IdUser = UserInitial.IdUser;
             string newPassword = "123456";
             user.Password = newPassword;
             var result = await UserDAL.ChangePasswordAsync(user, UserInitial.Password);
@@ -101,7 +101,7 @@ namespace SysTaimsal.DAL.Tests
         public async Task T8LoginAsyncTest()
         {
             var user = new User();
-            user.Id = UserInitial.Id;
+            user.IdUser = UserInitial.IdUser;
             user.Password = UserInitial.Password;
             var resultuser = await UserDAL.LoginAsync(user);
             Assert.AreEqual(user.Login, resultuser.Login);
@@ -111,7 +111,7 @@ namespace SysTaimsal.DAL.Tests
         public async Task T9DeleteAsyncTest()
         {
             var user = new User();
-            user.Id = UserInitial.Id;
+            user.IdUser = UserInitial.IdUser;
             int result = await UserDAL.DeleteAsync(user);
             Assert.AreNotEqual(0, result);
         }

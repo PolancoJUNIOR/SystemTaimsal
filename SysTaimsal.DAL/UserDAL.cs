@@ -28,8 +28,8 @@ namespace SysTaimsal.DAL
         private static async Task<bool> ExistLogin(User pUser, SysTaimsalBDContext pDbContext)
         {
             bool result = false;
-            var loginUserExiste = await pDbContext.User.FirstOrDefaultAsync(s => s.Login == pUser.Login && s.Id != pUser.Id);
-            if (loginUserExiste != null && loginUserExiste.Id > 0 && loginUserExiste.Login == pUser.Login)
+            var loginUserExiste = await pDbContext.User.FirstOrDefaultAsync(s => s.Login == pUser.Login && s.IdUser != pUser.IdUser);
+            if (loginUserExiste != null && loginUserExiste.IdUser > 0 && loginUserExiste.Login == pUser.Login)
                 result = true;
             return result;
         }
@@ -64,7 +64,7 @@ namespace SysTaimsal.DAL
                 bool existeLogin = await ExistLogin(pUser, BDContext);
                 if (existeLogin == false)
                 {
-                    var user = await BDContext.User.FirstOrDefaultAsync(s => s.Id == pUser.Id);
+                    var user = await BDContext.User.FirstOrDefaultAsync(s => s.IdUser == pUser.IdUser);
                     user.IdRol = pUser.IdRol;
                     user.NameUser = pUser.NameUser;
                     user.LastNameUser = pUser.LastNameUser;
@@ -83,7 +83,7 @@ namespace SysTaimsal.DAL
             int result = 0;
             using (var BDContext = new SysTaimsalBDContext())
             {
-                var User = await BDContext.User.FirstOrDefaultAsync(s => s.Id == pUser.Id);
+                var User = await BDContext.User.FirstOrDefaultAsync(s => s.IdUser == pUser.IdUser);
                 BDContext.User.Remove(User);
                 result = await BDContext.SaveChangesAsync();
             }
@@ -94,7 +94,7 @@ namespace SysTaimsal.DAL
             var User = new User();
             using (var BDContext = new SysTaimsalBDContext())
             {
-                User = await BDContext.User.FirstOrDefaultAsync(s => s.Id == pUser.Id);
+                User = await BDContext.User.FirstOrDefaultAsync(s => s.IdUser == pUser.IdUser);
             }
             return User;
         }
@@ -109,8 +109,8 @@ namespace SysTaimsal.DAL
         }
         internal static IQueryable<User> QuerySelect(IQueryable<User> pQuery, User pUser)
         {
-            if (pUser.Id > 0)
-                pQuery = pQuery.Where(s => s.Id == pUser.Id);
+            if (pUser.IdUser > 0)
+                pQuery = pQuery.Where(s => s.IdUser == pUser.IdUser);
             if (pUser.IdRol > 0)
                 pQuery = pQuery.Where(s => s.IdRol == pUser.IdRol);
             //if (pUser.IdReport > 0)
@@ -129,7 +129,7 @@ namespace SysTaimsal.DAL
                 DateTime fechaFinal = fechaInicial.AddDays(1).AddMilliseconds(-1);
                 pQuery = pQuery.Where(s => s.RegistrationUser >= fechaInicial && s.RegistrationUser<= fechaFinal);
             }
-            pQuery = pQuery.OrderByDescending(s => s.Id).AsQueryable();
+            pQuery = pQuery.OrderByDescending(s => s.IdUser).AsQueryable();
             if (pUser.Top_Aux > 0)
                 pQuery = pQuery.Take(pUser.Top_Aux).AsQueryable();
             return pQuery;
@@ -175,7 +175,7 @@ namespace SysTaimsal.DAL
             EncriptarMD5(UserPassAnt);
             using (var BDContext = new SysTaimsalBDContext())
             {
-                var User = await BDContext.User.FirstOrDefaultAsync(s => s.Id == pUser.Id);
+                var User = await BDContext.User.FirstOrDefaultAsync(s => s.IdUser == pUser.IdUser);
                 if (UserPassAnt.Password == User.Password)
                 {
                     EncriptarMD5(pUser);

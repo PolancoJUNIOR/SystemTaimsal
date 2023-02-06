@@ -12,6 +12,7 @@ namespace SysTaimsal.DAL
 
         public DbSet<Rol> Rol { get; set; }
         public DbSet<User> User { get; set; }
+        public DbSet<UserDev> UserDevs { get; set; }
         public DbSet<Client> Clients { get; set; }
         public DbSet<Report> Reports { get; set; }
         public DbSet<Machine> Machines { get; set; }
@@ -20,7 +21,7 @@ namespace SysTaimsal.DAL
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-NJIEQE0\SQLEXPRESS;Initial Catalog=DevTaimsalDB;persist security info=False;Integrated Security=True");
+            optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-NJIEQE0\SQLEXPRESS;Initial Catalog=DbSysTaimsalDev;persist security info=False;Integrated Security=True");
             //optionsBuilder.UseSqlServer(@"workstation id=DbSysTaimsalDev.mssql.somee.com;packet size=4096;user id=UserSysTaimsal_SQLLogin_1;pwd=6eebslpat7;data source=DbSysTaimsalDev.mssql.somee.com;persist security info=False;initial catalog=DbSysTaimsalDev");
         }
 
@@ -53,14 +54,14 @@ namespace SysTaimsal.DAL
 
             modelBuilder.Entity<User>(entity =>
             {
-                entity.HasKey(u => u.Id)
+                entity.HasKey(u => u.IdUser)
                     .HasName("PK__User__Taimsal__001");
 
                 entity.Property(e => e.Password).IsFixedLength();
 
                 entity.HasOne(u => u.Rol)
                     .WithMany(r => r.users)
-                    .HasForeignKey(r => r.Id)
+                    .HasForeignKey(r => r.IdUser)
                     .HasConstraintName("FK1__Rol__User__001")
                     .OnDelete(DeleteBehavior.ClientNoAction);
             });
