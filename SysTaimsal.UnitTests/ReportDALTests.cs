@@ -12,12 +12,12 @@ namespace SysTaimsal.DAL.Tests
     [TestClass()]
     public class ReportDALTests
     {
-        private static Report reportInitial = new Report { IdReport = 1, IdClient = 1, Id = 1, IdMachine=1, IdProduct = 1, IdProvider = 1 };
+        private static Report reportInitial = new Report { IdReport = 1, IdClient = 2, IdUser = 3, IdMachine=2, IdProduct = 2, IdProvider = 2 };
         [TestMethod()]
         public async Task T1CrearteAsyncTest()
         {
             var report = new Report();
-            report.Id = reportInitial.Id;
+            report.IdUser = reportInitial.IdUser;
             report.IdClient = reportInitial.IdClient;
             report.IdProduct = reportInitial.IdProduct;
             report.IdProvider = reportInitial.IdProvider;

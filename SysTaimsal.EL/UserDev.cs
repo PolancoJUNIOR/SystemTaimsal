@@ -10,6 +10,9 @@ namespace SysTaimsal.EL
 {
     public partial class UserDev
     {
+        public UserDev() {
+            Reports= new HashSet<Report>();
+        }
         [Key]
         public int IdUser { get; set; }
 
@@ -38,8 +41,8 @@ namespace SysTaimsal.EL
         public DateTime RegistrationUser { get; set; }
         [ForeignKey("IdRol")]
         public Rol Rol { get; set; }
-        //[ForeignKey("IdReport")]
-        //public virtual ICollection<Report> Reports { get; set; }
+        [ForeignKey("IdReport")]
+        public virtual ICollection<Report> Reports { get; set; }
 
         [NotMapped]
         public int Top_Aux { get; set; }

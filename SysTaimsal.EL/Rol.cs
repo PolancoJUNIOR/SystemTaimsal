@@ -7,7 +7,7 @@ namespace SysTaimsal.EL
     public partial class Rol
     {
         public Rol() {
-            users = new HashSet<User>();
+            users = new HashSet<UserDev>();
         }
 
         [Key]
@@ -18,6 +18,6 @@ namespace SysTaimsal.EL
         [NotMapped]
         public int Top_Aux { get; set; }
         [ForeignKey("Id")]
-        public virtual ICollection<User> users { get; set; }
+        public virtual ICollection<UserDev> users { get; set; }
     }
 }

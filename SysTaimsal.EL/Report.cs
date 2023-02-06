@@ -20,12 +20,12 @@ namespace SysTaimsal.EL
         public int? IdProduct { get; set; }
         public int? IdProvider { get; set; }
         public int? IdMachine { get; set; }
-        public int? Id { get; set; }
+        public int? IdUser { get; set; }
         [NotMapped]
         public int Top_Aux { get; set; }
         
-        [ForeignKey("Id")]
-        public virtual User? user { get; set; }
+        [ForeignKey("IdUser")]
+        public virtual UserDev? user { get; set; }
         
         [ForeignKey("IdClient")]
         public virtual Client? Client { get; set; }

@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO.IsolatedStorage;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using System.Security.Cryptography;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.EntityFrameworkCore;
 using SysTaimsal.EL;
-using System.Data.Entity;
 
 namespace SysTaimsal.DAL
 {
@@ -156,7 +157,7 @@ namespace SysTaimsal.DAL
             {
                 EncryotMD5(pUsuario);
                 usuario = await bdContexto.UserDevs.FirstOrDefaultAsync(s => s.Login == pUsuario.Login &&
-                s.Password == pUsuario.Password && s.Status_User== (byte)Status_User.ACTIVO);
+                s.Password == pUsuario.Password && s.Status_User== (byte)Status_Users.ACTIVO);
             }
             return usuario;
         }

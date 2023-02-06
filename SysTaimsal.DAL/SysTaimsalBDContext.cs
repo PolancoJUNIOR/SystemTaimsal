@@ -11,7 +11,7 @@ namespace SysTaimsal.DAL
         public SysTaimsalBDContext(DbContextOptions<SysTaimsalBDContext> options) : base(options) { }
 
         public DbSet<Rol> Rol { get; set; }
-        public DbSet<User> User { get; set; }
+        //public DbSet<User> User { get; set; }
         public DbSet<UserDev> UserDevs { get; set; }
         public DbSet<Client> Clients { get; set; }
         public DbSet<Report> Reports { get; set; }
@@ -21,8 +21,8 @@ namespace SysTaimsal.DAL
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-NJIEQE0\SQLEXPRESS;Initial Catalog=DbSysTaimsalDev;persist security info=False;Integrated Security=True");
-            //optionsBuilder.UseSqlServer(@"workstation id=DbSysTaimsalDev.mssql.somee.com;packet size=4096;user id=UserSysTaimsal_SQLLogin_1;pwd=6eebslpat7;data source=DbSysTaimsalDev.mssql.somee.com;persist security info=False;initial catalog=DbSysTaimsalDev");
+            //optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-NJIEQE0\SQLEXPRESS;Initial Catalog=DbSysTaimsalDev;persist security info=False;Integrated Security=True");
+            optionsBuilder.UseSqlServer(@"workstation id=DbSysTaimsalDev.mssql.somee.com;packet size=4096;user id=UserSysTaimsal_SQLLogin_1;pwd=6eebslpat7;data source=DbSysTaimsalDev.mssql.somee.com;persist security info=False;initial catalog=DbSysTaimsalDev");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -52,7 +52,7 @@ namespace SysTaimsal.DAL
 
             });
 
-            modelBuilder.Entity<User>(entity =>
+            modelBuilder.Entity<UserDev>(entity =>
             {
                 entity.HasKey(u => u.IdUser)
                     .HasName("PK__User__Taimsal__001");
@@ -61,7 +61,7 @@ namespace SysTaimsal.DAL
 
                 entity.HasOne(u => u.Rol)
                     .WithMany(r => r.users)
-                    .HasForeignKey(r => r.IdUser)
+                    .HasForeignKey(r => r.IdRol)
                     .HasConstraintName("FK1__Rol__User__001")
                     .OnDelete(DeleteBehavior.ClientNoAction);
             });
@@ -79,32 +79,31 @@ namespace SysTaimsal.DAL
 
                 entity.HasOne(c => c.user)
                     .WithMany(r => r.Reports)
-                    .HasForeignKey(r => r.IdReport)
+                    .HasForeignKey(r => r.IdUser)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK1__User__Report");
 
                 entity.HasOne(e => e.Client)
                     .WithMany(r => r.Reports)
-                    .HasForeignKey(r => r.IdReport)
+                    .HasForeignKey(r => r.IdClient)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK2__Clients__Report");
 
                 entity.HasOne(e => e.Provider)
                     .WithMany(r => r.Reports)
-                    .HasForeignKey(r => r.IdReport)
+                    .HasForeignKey(r => r.IdProvider)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK3__Provider__Report__001");
                     
                 entity.HasOne(e => e.Product)
                     .WithMany(p => p.Reports)
-                    .HasForeignKey(p => p.IdReport)
+                    .HasForeignKey(p => p.IdProduct)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK4__Products__Report");
 
-
                 entity.HasOne(p => p.Machine)
                     .WithMany(c => c.Reports)
-                    .HasForeignKey(c => c.IdReport)
+                    .HasForeignKey(c => c.IdMachine)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK5_Machine__Report__001");
 

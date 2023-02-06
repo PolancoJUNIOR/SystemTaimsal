@@ -21,7 +21,7 @@ namespace SysTaimsal.DAL
             using (var BDContext = new SysTaimsalBDContext())
             {
                 var report = await BDContext.Reports.FirstOrDefaultAsync(s => s.IdReport == pReport.IdReport);
-                report.Id = pReport.Id;
+                report.IdUser = pReport.IdUser;
                 report.IdProduct = pReport.IdProduct;
                 report.IdProvider = pReport.IdProvider;
                 report.IdClient = pReport.IdClient;
@@ -63,8 +63,8 @@ namespace SysTaimsal.DAL
                 pQuery = pQuery.Where(s => s.IdProvider == pReport.IdProvider);
             if(pReport.IdMachine > 0)
                 pQuery = pQuery.Where(s => s.IdMachine == pReport.IdMachine);
-            if (pReport.Id > 0)
-                pQuery = pQuery.Where(s => s.Id == pReport.Id);
+            if (pReport.IdUser > 0)
+                pQuery = pQuery.Where(s => s.IdUser  == pReport.IdUser);
             if (pReport.Top_Aux > 0)
                 pQuery = pQuery.Take(pReport.Top_Aux).AsQueryable();
             return pQuery;
