@@ -17,10 +17,10 @@ namespace SysTaimsal.DAL.Tests
         public async Task T1CreateAsyncTest()
         {
             var product = new Product();
-            product.NameProduct = ProductInitial.NameProduct;
-            product.ImageProduct = ProductInitial.ImageProduct;
-            product.DescriptionProduct = ProductInitial.DescriptionProduct;
-            product.Price = ProductInitial.Price;
+            product.NameProduct = "Product Two";
+            product.ImageProduct = "../Img/Products/Producto.jpg";
+            product.DescriptionProduct = "Piesa metalica, medidas 12.42H 145.2T";
+            product.Price = (decimal?)0.254;
             int result = await ProductDAL.CrearteAsync(product);
             Assert.AreNotEqual(0, result);
             ProductInitial.IdProduct = product.IdProduct;
@@ -31,9 +31,10 @@ namespace SysTaimsal.DAL.Tests
         {
             var product = new Product();
             product.IdProduct = ProductInitial.IdProduct;
-            product.NameProduct = "Product Two";
-            product.ImageProduct = "../Img/Products/Producto.jpg";
-            product.DescriptionProduct = "Piesa metalica, medidas 12.42H 145.2T";
+            product.NameProduct = ProductInitial.NameProduct;
+            product.ImageProduct = ProductInitial.ImageProduct;
+            product.DescriptionProduct = ProductInitial.DescriptionProduct;
+            product.Price = (decimal?)ProductInitial.Price;
             int result = await ProductDAL.ModifyAsync(product);
             Assert.AreNotEqual(0, result);
         }
@@ -58,8 +59,7 @@ namespace SysTaimsal.DAL.Tests
         public async Task T5SearchAsyncTest()
         {
             var product = new Product();
-            product.NameProduct = "Product Two";
-            product.Top_Aux = 10;
+            product.IdProduct= ProductInitial.IdProduct;
             var result = await ProductDAL.SearchAsync(product);
             Assert.AreNotEqual(0, result.Count);
         }

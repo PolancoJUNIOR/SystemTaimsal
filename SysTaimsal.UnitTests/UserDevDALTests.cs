@@ -12,7 +12,7 @@ namespace SysTaimsal.DAL.Tests
     [TestClass()]
     public class UserDevDALTests
     {
-        private static UserDev UserDevInicial = new UserDev { IdUser = 7, IdRol = 2, Login = "JuanUser", Password = "12345" };
+        private static UserDev UserDevInicial = new UserDev { IdUser = 7, IdRol = 1, Login = "JuanUser", Password = "12345" };
         [TestMethod()]
         public async Task  CrearAsyncTest()
         {

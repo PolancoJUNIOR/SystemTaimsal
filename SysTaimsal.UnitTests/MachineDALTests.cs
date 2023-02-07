@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace SysTaimsal.DAL.Tests
-{
+{   
     [TestClass()]
     public class MachineDALTests
     {
@@ -28,9 +28,10 @@ namespace SysTaimsal.DAL.Tests
         public async Task T2ModifyAsyncTest()
         {
             var machine = new Machine();
-            machine.NameMachine = "MachineMachineMod-213";
+            machine.IdMachine = MachineInitial.IdMachine;
+            machine.NameMachine = MachineInitial.NameMachine;
             int result = await MachineDAL.ModifyAsync(machine);
-            Assert.AreNotEqual(0, result);
+            Assert.AreNotEqual(result, 0);
         }
 
         [TestMethod()]

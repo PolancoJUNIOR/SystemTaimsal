@@ -22,7 +22,7 @@ namespace SysTaimsal.DAL.Tests
         {
             var provider = new Provider();
             provider.IdProvider = providerInitial.IdProvider;
-            provider.NameProvider = "";
+            provider.NameProvider = "A";
             int result = await ProviderDAL.ModifyAsync(provider);
             Assert.AreNotEqual(0, result);
         }
@@ -47,8 +47,7 @@ namespace SysTaimsal.DAL.Tests
         public async Task T5SearchAsyncTest()
         {
             var provider = new Provider();
-            provider.NameProvider = "1";
-            provider.Top_Aux = 10;
+            provider.IdProvider = providerInitial.IdProvider;
             var result = await ProviderDAL.SearchAsync(provider);
             Assert.AreNotEqual(0, result.Count);
         }
