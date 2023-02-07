@@ -1,0 +1,78 @@
+﻿@model IEnumerable<SysTaimsal.EL.UserDev>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdUser)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NameUser)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastNameUser)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Login)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Password)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status_User)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RegistrationUser)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rol)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdUser)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NameUser)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastNameUser)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Login)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Password)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status_User)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RegistrationUser)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rol.NameRol)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.IdUser">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.IdUser">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.IdUser">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

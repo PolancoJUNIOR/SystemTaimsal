@@ -11,7 +11,7 @@ namespace SysTaimsal.DAL.Tests
         public async Task T1CreateAsyncTest()
         {
             var provider = new Provider();
-            provider.NameProvider = "ProvidersPruebas";
+            provider.NameProvider = "ProvidersPrueba";
             int result = await ProviderDAL.CreateAsync(provider);
             Assert.AreNotEqual(0, result);
             providerInitial.IdProvider = provider.IdProvider;
