@@ -1,0 +1,58 @@
+﻿/* --- --- CAROUSEL DOS --- --- */
+.carousel_contenedor {
+    position: relative;
+}
+
+.carousel_anterior,
+.carousel_siguiente {
+    position: absolute;
+    display: block;
+    width: 30px;
+    height: 30px;
+    border: none;
+    top: calc(50% - 35px);
+    cursor: pointer;
+    line-height: 30px;
+    text-align: center;
+    background: none;
+    color: #000000;
+    opacity: 50%;
+}
+
+    .carousel_anterior:hover,
+    .carousel_siguiente:hover {
+        opacity: 100%;
+    }
+
+.carousel_anterior {
+    left: -20px;
+}
+
+.carousel_siguiente {
+    right: -20px;
+}
+
+.carousel_lista {
+    overflow: hidden;
+}
+
+.carousel_elemento {
+    text-align: center;
+}
+
+.carousel_indicadores .glider-dot {
+    display: block;
+    width: 30px;
+    height: 4px;
+    background: #808080;
+    opacity: .2;
+    border-radius: 0;
+}
+
+    .carousel_indicadores .glider-dot:hover {
+        opacity: .5;
+    }
+
+    .carousel_indicadores .glider-dot.active {
+        opacity: 1;
+    }
