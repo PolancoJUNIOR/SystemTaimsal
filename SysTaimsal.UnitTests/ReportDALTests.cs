@@ -32,7 +32,7 @@ namespace SysTaimsal.DAL.Tests
         {
             var report = new Report();
             report.IdReport = reportInitial.IdReport;
-            report.IdProduct = 2;
+            report.IdMachine = 1;
             int result = await ReportDAL.ModifyAsync(report);
             Assert.AreNotEqual(0, result);
         }
