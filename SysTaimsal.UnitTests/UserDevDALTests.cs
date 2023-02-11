@@ -87,16 +87,25 @@ namespace SysTaimsal.DAL.Tests
             Assert.AreNotEqual(0, result);
             UserDevInicial.Password = passwordNuevo;
         }
+
         [TestMethod()]
         public async Task LoginAsyncTest()
         {
-            var UserDev = new UserDev();
-            UserDev.Login = UserDevInicial.Login;
-            UserDev.Password = "123456";
-            var resultUserDev = await UserDevDAL.LoginAsync(UserDev);
-            Assert.AreEqual(UserDev.Login, resultUserDev.Login);
+            var pUserDev = new UserDev();        
+            pUserDev.Login = UserDevInicial.Login;
+            pUserDev.Password = UserDevInicial.Password;
+            var resultUserDev = await UserDevDAL.LoginAsync(pUserDev);
+            Assert.AreEqual(pUserDev.Login, resultUserDev.Login);
         }
 
+        [TestMethod()]
+        public void EncryotMD5Test()
+        {
+            UserDev user = new UserDev();
+            user.Password = "password";
+            UserDevDAL.EncryotMD5(user);
+            Assert.AreEqual("5f4dcc3b5aa765d61d8327deb882cf99", user.Password);
+        }
 
         [TestMethod()]
         public async Task EliminarAsyncTest()
