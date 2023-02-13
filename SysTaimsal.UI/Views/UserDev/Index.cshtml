@@ -4,17 +4,14 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Usuario</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
+<p style="padding-left:88%">
+    <a type="button" class="btn btn-primary" asp-action="Create">Nuevo Usuario</a>
 </p>
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.IdUser)
-            </th>
             <th>
                 @Html.DisplayNameFor(model => model.NameUser)
             </th>
@@ -44,9 +41,6 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IdUser)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.NameUser)
                 </td>
                 <td>
@@ -68,9 +62,9 @@
                     @Html.DisplayFor(modelItem => item.Rol.NameRol)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.IdUser">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.IdUser">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.IdUser">Delete</a>
+                    <a type="button" class="btn btn-success" asp-action="Edit" asp-route-id="@item.IdUser">Editar</a>
+                    <a type="button" class="btn btn-info" asp-action="Details" asp-route-id="@item.IdUser">Detalles</a>
+                    <a type="button" class="btn btn-danger" asp-action="Delete" asp-route-id="@item.IdUser">Eliminar</a>
                 </td>
             </tr>
         }

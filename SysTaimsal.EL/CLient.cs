@@ -6,6 +6,11 @@ namespace SysTaimsal.EL
     [Table("Client")]
     public partial class Client
     {
+        public Client()
+        {
+            Reports = new HashSet<Report>();
+        }
+
         [Key]
         public int IdClient { get; set; }
         [Required(ErrorMessage = "Nombre es obligatorio")]

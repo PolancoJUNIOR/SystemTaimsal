@@ -11,7 +11,11 @@ namespace SysTaimsal.EL
     [Table("Product")]
     public partial class Product
     {
-   
+        public Product()
+        {
+            Reports = new HashSet<Report>();
+        }
+
         [Key]
         public int IdProduct { get; set; }
         [Required(ErrorMessage = "Nombre es obligatorio")]

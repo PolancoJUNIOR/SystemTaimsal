@@ -1,4 +1,4 @@
-﻿@model SysTaimsal.EL.Rol
+﻿@model SysTaimsal.EL.Machine
 
 @{
     ViewData["Title"] = "Delete";
@@ -8,19 +8,25 @@
 
 <h3>¿Estás seguro de eliminar?</h3>
 <div>
-    <h4>Rol</h4>
+    <h4>Maquinaria</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NameRol)
+            @Html.DisplayNameFor(model => model.NameMachine)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NameRol)
+            @Html.DisplayFor(model => model.NameMachine)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ImageMachine)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ImageMachine)
         </dd>
     </dl>
     
     <form asp-action="Delete">
-        <input type="hidden" asp-for="IdRol" />
+        <input type="hidden" asp-for="IdMachine" />
         <button type="submit" value="Delete" class="btn btn-danger">Eliminar</button> |
         <a type="button" asp-action="Index" class="btn btn-primary">Volvel a la Lista</a>
     </form>

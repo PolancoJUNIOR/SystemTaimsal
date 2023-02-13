@@ -4,49 +4,46 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<h1>Editar</h1>
 
-<h4>Report</h4>
+<h4>Reporte</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="IdReport" />
-            <div class="form-group">
-                <label asp-for="IdClient" class="control-label"></label>
+            <div class="form-group mb-3">
+                <label asp-for="IdClient" class="control-label">IdCliente</label>
                 <select asp-for="IdClient" class="form-control" asp-items="ViewBag.IdClient"></select>
                 <span asp-validation-for="IdClient" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="IdProduct" class="control-label"></label>
+            <div class="form-group mb-3">
+                <label asp-for="IdProduct" class="control-label">IdProducto</label>
                 <select asp-for="IdProduct" class="form-control" asp-items="ViewBag.IdProduct"></select>
                 <span asp-validation-for="IdProduct" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="IdProvider" class="control-label"></label>
+            <div class="form-group mb-3">
+                <label asp-for="IdProvider" class="control-label">IdProveedor</label>
                 <select asp-for="IdProvider" class="form-control" asp-items="ViewBag.IdProvider"></select>
                 <span asp-validation-for="IdProvider" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="IdMachine" class="control-label"></label>
+            <div class="form-group mb-3">
+                <label asp-for="IdMachine" class="control-label">IdMaquinaria</label>
                 <select asp-for="IdMachine" class="form-control" asp-items="ViewBag.IdMachine"></select>
                 <span asp-validation-for="IdMachine" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="IdUser" class="control-label"></label>
+            <div class="form-group mb-3">
+                <label asp-for="IdUser" class="control-label">IdUsuario</label>
                 <select asp-for="IdUser" class="form-control" asp-items="ViewBag.IdUser"></select>
                 <span asp-validation-for="IdUser" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+            <div class="form-group mb-3">
+                <button type="submit" value="Save" class="btn btn-success">Editar</button> |
+                <a type="button" class="btn btn-primary" asp-action="Index">Volver a la Lista</a>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

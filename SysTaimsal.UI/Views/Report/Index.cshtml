@@ -4,17 +4,17 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Reporte</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
+<p style="padding-left:88%">
+    <a type="button" class="btn btn-primary" asp-action="Create">Nuevo Reporte</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.IdReport)
-            </th>          
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.user)
             </th>
@@ -34,32 +34,33 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdReport)
-            </td>       
-            <td>
-                @Html.DisplayFor(modelItem => item.user.NameUser)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Client.NameClient)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Product.ImageProduct)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Provider.NameProvider)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Machine.NameMachine)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdReport">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdReport">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdReport">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdReport)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.user.NameUser)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Client.NameClient)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.ImageProduct)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Provider.NameProvider)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Machine.NameMachine)
+                </td>
+                <td>
+                    <a type="button" class="btn btn-success" asp-action="Edit" asp-route-id="@item.IdReport">Editar</a>
+                    <a type="button" class="btn btn-info" asp-action="Details" asp-route-id="@item.IdReport">Detalles</a>
+                    <a type="button" class="btn btn-danger" asp-action="Delete" asp-route-id="@item.IdReport">Eliminar</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
