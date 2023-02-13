@@ -1,0 +1,41 @@
+﻿@model IEnumerable<SysTaimsal.EL.Client>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Cliente</h1>
+
+<p style="padding-left:88%">
+    <a type="button" class="btn btn-primary" asp-action="Create">Nuevo Cliente</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NameClient)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NameClient)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </td>
+                <td>
+                    <a type="button" class="btn btn-success" asp-action="Edit" asp-route-id="@item.IdClient">Editar</a>
+                    <a type="button" class="btn btn-info" asp-action="Details" asp-route-id="@item.IdClient">Detalles</a>
+                    <a type="button" class="btn btn-danger" asp-action="Delete" asp-route-id="@item.IdClient">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

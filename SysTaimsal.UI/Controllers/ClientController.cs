@@ -10,85 +10,80 @@ using SysTaimsal.EL;
 
 namespace SysTaimsal.UI.Controllers
 {
-    public class UserDevController : Controller
+    public class ClientController : Controller
     {
         private readonly SysTaimsalBDContext _context = new SysTaimsalBDContext();
 
-        // GET: UserDev
+        // GET: Client
         public async Task<IActionResult> Index()
         {
-            var sysTaimsalBDContext = _context.UserDevs.Include(u => u.Rol);
-            return View(await sysTaimsalBDContext.ToListAsync());
+              return View(await _context.Clients.ToListAsync());
         }
 
-        // GET: UserDev/Details/5
+        // GET: Client/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.UserDevs == null)
+            if (id == null || _context.Clients == null)
             {
                 return NotFound();
             }
 
-            var userDev = await _context.UserDevs
-                .Include(u => u.Rol)
-                .FirstOrDefaultAsync(m => m.IdUser == id);
-            if (userDev == null)
+            var client = await _context.Clients
+                .FirstOrDefaultAsync(m => m.IdClient == id);
+            if (client == null)
             {
                 return NotFound();
             }
 
-            return View(userDev);
+            return View(client);
         }
 
-        // GET: UserDev/Create
+        // GET: Client/Create
         public IActionResult Create()
         {
-            ViewData["IdRol"] = new SelectList(_context.Rol, "IdRol", "NameRol");
             return View();
         }
 
-        // POST: UserDev/Create
+        // POST: Client/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdUser,IdRol,NameUser,LastNameUser,Login,Password,ConfirmPassword_aux,Status_User,RegistrationUser")] UserDev userDev)
+        public async Task<IActionResult> Create([Bind("IdClient,NameClient,PhoneNumber")] Client client)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(userDev);
+                _context.Add(client);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdRol"] = new SelectList(_context.Rol, "IdRol", "NameRol", userDev.IdRol);
-            return View(userDev);
+            return View(client);
         }
 
-        // GET: UserDev/Edit/5
+        // GET: Client/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.UserDevs == null)
+            if (id == null || _context.Clients == null)
             {
                 return NotFound();
             }
 
-            var userDev = await _context.UserDevs.FindAsync(id);
-            if (userDev == null)
+            var client = await _context.Clients.FindAsync(id);
+            if (client == null)
             {
                 return NotFound();
             }
-            ViewData["IdRol"] = new SelectList(_context.Rol, "IdRol", "NameRol", userDev.IdRol);
-            return View(userDev);
+            return View(client);
         }
 
-        // POST: UserDev/Edit/5
+        // POST: Client/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdUser,IdRol,NameUser,LastNameUser,Login,Password,ConfirmPassword_aux,Status_User,RegistrationUser")] UserDev userDev)
+        public async Task<IActionResult> Edit(int id, [Bind("IdClient,NameClient,PhoneNumber")] Client client)
         {
-            if (id != userDev.IdUser)
+            if (id != client.IdClient)
             {
                 return NotFound();
             }
@@ -97,12 +92,12 @@ namespace SysTaimsal.UI.Controllers
             {
                 try
                 {
-                    _context.Update(userDev);
+                    _context.Update(client);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!UserDevExists(userDev.IdUser))
+                    if (!ClientExists(client.IdClient))
                     {
                         return NotFound();
                     }
@@ -113,51 +108,49 @@ namespace SysTaimsal.UI.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdRol"] = new SelectList(_context.Rol, "IdRol", "NameRol", userDev.IdRol);
-            return View(userDev);
+            return View(client);
         }
 
-        // GET: UserDev/Delete/5
+        // GET: Client/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.UserDevs == null)
+            if (id == null || _context.Clients == null)
             {
                 return NotFound();
             }
 
-            var userDev = await _context.UserDevs
-                .Include(u => u.Rol)
-                .FirstOrDefaultAsync(m => m.IdUser == id);
-            if (userDev == null)
+            var client = await _context.Clients
+                .FirstOrDefaultAsync(m => m.IdClient == id);
+            if (client == null)
             {
                 return NotFound();
             }
 
-            return View(userDev);
+            return View(client);
         }
 
-        // POST: UserDev/Delete/5
+        // POST: Client/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.UserDevs == null)
+            if (_context.Clients == null)
             {
-                return Problem("Entity set 'SysTaimsalBDContext.UserDevs'  is null.");
+                return Problem("Entity set 'SysTaimsalBDContext.Clients'  is null.");
             }
-            var userDev = await _context.UserDevs.FindAsync(id);
-            if (userDev != null)
+            var client = await _context.Clients.FindAsync(id);
+            if (client != null)
             {
-                _context.UserDevs.Remove(userDev);
+                _context.Clients.Remove(client);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool UserDevExists(int id)
+        private bool ClientExists(int id)
         {
-          return _context.UserDevs.Any(e => e.IdUser == id);
+          return _context.Clients.Any(e => e.IdClient == id);
         }
     }
 }

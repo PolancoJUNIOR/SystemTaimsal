@@ -4,57 +4,59 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1>Añadir Usuario</h1>
 
-<h4>UserDev</h4>
+<h4>Usuario</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="IdRol" class="control-label"></label>
+            <div class="form-group mb-3">
+                <label asp-for="IdRol" class="control-label">IdRol</label>
                 <select asp-for="IdRol" class ="form-control" asp-items="ViewBag.IdRol"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="NameUser" class="control-label"></label>
+            </div>         
+            <div class="form-group mb-3">
+                <label asp-for="NameUser" class="control-label">Nombre de Usuario</label>
                 <input asp-for="NameUser" class="form-control" />
                 <span asp-validation-for="NameUser" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="LastNameUser" class="control-label"></label>
+            <div class="form-group mb-3">
+                <label asp-for="LastNameUser" class="control-label">Apellido de Usuario</label>
                 <input asp-for="LastNameUser" class="form-control" />
                 <span asp-validation-for="LastNameUser" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Login" class="control-label"></label>
+            <div class="form-group mb-3">
+                <label asp-for="Login" class="control-label">Correo</label>
                 <input asp-for="Login" class="form-control" />
                 <span asp-validation-for="Login" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
+            <div class="form-group mb-3">
+                <label asp-for="Password" class="control-label">Contraseña</label>
                 <input asp-for="Password" class="form-control" />
                 <span asp-validation-for="Password" class="text-danger"></span>
+            </div>      
+            <div class="form-group mb-3">
+                <label asp-for="ConfirmPassword_aux" class="control-label">Confirmar Contraseña</label>
+                <input asp-for="ConfirmPassword_aux" class="form-control" />
+                <span asp-validation-for="ConfirmPassword_aux" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Status_User" class="control-label"></label>
+            <div class="form-group mb-3">
+                <label asp-for="Status_User" class="control-label">Estado de Usuario</label>
                 <input asp-for="Status_User" class="form-control" />
                 <span asp-validation-for="Status_User" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="RegistrationUser" class="control-label"></label>
+            <div class="form-group mb-3">
+                <label asp-for="RegistrationUser" class="control-label">Registro de Usuario</label>
                 <input asp-for="RegistrationUser" class="form-control" />
                 <span asp-validation-for="RegistrationUser" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div class="form-group mb-3">
+                <button type="submit" value="Create" class="btn btn-success">Crear</button> |
+                <a type="button" asp-action="Index" class="btn btn-primary">Volver a la Lista</a>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

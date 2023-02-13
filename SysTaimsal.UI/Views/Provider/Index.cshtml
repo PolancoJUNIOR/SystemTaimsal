@@ -4,38 +4,31 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Proveedor</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
+<p style="padding-left:86%">
+    <a type="button" class="btn btn-primary" asp-action="Create">Nuevo Proveedor</a>
 </p>
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.IdProvider)
-            </th>
             <th>
                 @Html.DisplayNameFor(model => model.NameProvider)
             </th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdProvider)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NameProvider)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.IdProvider">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.IdProvider">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.IdProvider">Delete</a>
-                </td>
-            </tr>
-        }
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NameProvider)
+            </td>
+            <td>
+                    <a type="button" class="btn btn-success" asp-action="Edit" asp-route-id="@item.IdProvider">Editar</a>
+                    <a type="button" class="btn btn-info" asp-action="Details" asp-route-id="@item.IdProvider">Detalles</a>
+                    <a type="button" class="btn btn-danger" asp-action="Delete" asp-route-id="@item.IdProvider">Eliminar</a>
+            </td>
+        </tr>
+}
     </tbody>
 </table>

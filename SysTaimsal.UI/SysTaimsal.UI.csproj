@@ -24,4 +24,8 @@
     <ProjectReference Include="..\SysTaimsal.EL\SysTaimsal.EL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\GuardarImagen\" />
+  </ItemGroup>
+
 </Project>

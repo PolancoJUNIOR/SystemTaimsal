@@ -1,0 +1,42 @@
+﻿@model IEnumerable<SysTaimsal.EL.Machine>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Maquinaria</h1>
+
+<p style="padding-left:85%">
+    <a type="button" class="btn btn-primary" asp-action="Create">Nueva Maquinaria</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NameMachine)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImageMachine)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NameMachine)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ImageMachine)
+                </td>
+                <td>
+                    <a type="button" class="btn btn-success" asp-action="Edit" asp-route-id="@item.IdMachine">Editar</a>
+                    <a type="button" class="btn btn-info" asp-action="Details" asp-route-id="@item.IdMachine">Detalles</a>
+                    <a type="button" class="btn btn-danger" asp-action="Delete" asp-route-id="@item.IdMachine">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,54 @@
+﻿@model IEnumerable<SysTaimsal.EL.Product>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Producto</h1>
+
+<p style="padding-left:86%">
+    <a type="button" class="btn btn-primary" asp-action="Create">Nuevo Producto</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NameProduct)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImageProduct)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DescriptionProduct)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NameProduct)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ImageProduct)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DescriptionProduct)
+                </td>
+                <td>
+                    $@Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    <a type="button" class="btn btn-success" asp-action="Edit" asp-route-id="@item.IdProduct">Editar</a>
+                    <a type="button" class="btn btn-info" asp-action="Details" asp-route-id="@item.IdProduct">Detalles</a>
+                    <a type="button" class="btn btn-danger" asp-action="Delete" asp-route-id="@item.IdProduct">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

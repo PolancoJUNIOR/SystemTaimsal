@@ -10,7 +10,12 @@ using System.Threading.Tasks;
 namespace SysTaimsal.EL
 {
     public  partial class Provider
-    { 
+    {
+        public Provider()
+        {
+            Reports = new HashSet<Report>();
+        }
+
         [Key]
         public int IdProvider { get; set; }
       

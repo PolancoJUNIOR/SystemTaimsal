@@ -6,6 +6,11 @@ namespace SysTaimsal.EL
     [Table("Machine")]
     public class Machine
     {
+        public Machine()
+        {
+            Reports = new HashSet<Report>();
+        }
+
         [Key]
         public int IdMachine { get; set; }
         [Required(ErrorMessage = "Nombre es obligatorio")]

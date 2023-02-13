@@ -10,85 +10,80 @@ using SysTaimsal.EL;
 
 namespace SysTaimsal.UI.Controllers
 {
-    public class UserDevController : Controller
+    public class ProductController : Controller
     {
         private readonly SysTaimsalBDContext _context = new SysTaimsalBDContext();
 
-        // GET: UserDev
+        // GET: Product
         public async Task<IActionResult> Index()
         {
-            var sysTaimsalBDContext = _context.UserDevs.Include(u => u.Rol);
-            return View(await sysTaimsalBDContext.ToListAsync());
+              return View(await _context.Products.ToListAsync());
         }
 
-        // GET: UserDev/Details/5
+        // GET: Product/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.UserDevs == null)
+            if (id == null || _context.Products == null)
             {
                 return NotFound();
             }
 
-            var userDev = await _context.UserDevs
-                .Include(u => u.Rol)
-                .FirstOrDefaultAsync(m => m.IdUser == id);
-            if (userDev == null)
+            var product = await _context.Products
+                .FirstOrDefaultAsync(m => m.IdProduct == id);
+            if (product == null)
             {
                 return NotFound();
             }
 
-            return View(userDev);
+            return View(product);
         }
 
-        // GET: UserDev/Create
+        // GET: Product/Create
         public IActionResult Create()
         {
-            ViewData["IdRol"] = new SelectList(_context.Rol, "IdRol", "NameRol");
             return View();
         }
 
-        // POST: UserDev/Create
+        // POST: Product/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdUser,IdRol,NameUser,LastNameUser,Login,Password,ConfirmPassword_aux,Status_User,RegistrationUser")] UserDev userDev)
+        public async Task<IActionResult> Create([Bind("IdProduct,NameProduct,ImageProduct,DescriptionProduct,Price")] Product product)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(userDev);
+                _context.Add(product);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdRol"] = new SelectList(_context.Rol, "IdRol", "NameRol", userDev.IdRol);
-            return View(userDev);
+            return View(product);
         }
 
-        // GET: UserDev/Edit/5
+        // GET: Product/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.UserDevs == null)
+            if (id == null || _context.Products == null)
             {
                 return NotFound();
             }
 
-            var userDev = await _context.UserDevs.FindAsync(id);
-            if (userDev == null)
+            var product = await _context.Products.FindAsync(id);
+            if (product == null)
             {
                 return NotFound();
             }
-            ViewData["IdRol"] = new SelectList(_context.Rol, "IdRol", "NameRol", userDev.IdRol);
-            return View(userDev);
+            return View(product);
         }
 
-        // POST: UserDev/Edit/5
+        // POST: Product/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdUser,IdRol,NameUser,LastNameUser,Login,Password,ConfirmPassword_aux,Status_User,RegistrationUser")] UserDev userDev)
+        public async Task<IActionResult> Edit(int id, [Bind("IdProduct,NameProduct,ImageProduct,DescriptionProduct,Price")] Product product)
         {
-            if (id != userDev.IdUser)
+            if (id != product.IdProduct)
             {
                 return NotFound();
             }
@@ -97,12 +92,12 @@ namespace SysTaimsal.UI.Controllers
             {
                 try
                 {
-                    _context.Update(userDev);
+                    _context.Update(product);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!UserDevExists(userDev.IdUser))
+                    if (!ProductExists(product.IdProduct))
                     {
                         return NotFound();
                     }
@@ -113,51 +108,49 @@ namespace SysTaimsal.UI.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdRol"] = new SelectList(_context.Rol, "IdRol", "NameRol", userDev.IdRol);
-            return View(userDev);
+            return View(product);
         }
 
-        // GET: UserDev/Delete/5
+        // GET: Product/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.UserDevs == null)
+            if (id == null || _context.Products == null)
             {
                 return NotFound();
             }
 
-            var userDev = await _context.UserDevs
-                .Include(u => u.Rol)
-                .FirstOrDefaultAsync(m => m.IdUser == id);
-            if (userDev == null)
+            var product = await _context.Products
+                .FirstOrDefaultAsync(m => m.IdProduct == id);
+            if (product == null)
             {
                 return NotFound();
             }
 
-            return View(userDev);
+            return View(product);
         }
 
-        // POST: UserDev/Delete/5
+        // POST: Product/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.UserDevs == null)
+            if (_context.Products == null)
             {
-                return Problem("Entity set 'SysTaimsalBDContext.UserDevs'  is null.");
+                return Problem("Entity set 'SysTaimsalBDContext.Products'  is null.");
             }
-            var userDev = await _context.UserDevs.FindAsync(id);
-            if (userDev != null)
+            var product = await _context.Products.FindAsync(id);
+            if (product != null)
             {
-                _context.UserDevs.Remove(userDev);
+                _context.Products.Remove(product);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool UserDevExists(int id)
+        private bool ProductExists(int id)
         {
-          return _context.UserDevs.Any(e => e.IdUser == id);
+          return _context.Products.Any(e => e.IdProduct == id);
         }
     }
 }
