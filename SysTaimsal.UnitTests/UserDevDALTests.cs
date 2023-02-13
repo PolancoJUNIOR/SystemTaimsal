@@ -12,7 +12,7 @@ namespace SysTaimsal.DAL.Tests
     [TestClass()]
     public class UserDevDALTests
     {
-        private static UserDev UserDevInicial = new UserDev { IdUser = 7, IdRol = 1, Login = "JuanUser", Password = "12345" };
+        private static UserDev UserDevInicial = new UserDev { IdUser = 7, IdRol = 1, Login = "JuanUser", Password = "123456" };
         [TestMethod()]
         public async Task  CrearAsyncTest()
         {
@@ -37,8 +37,8 @@ namespace SysTaimsal.DAL.Tests
             var UserDev = new UserDev();
             UserDev.IdUser = UserDevInicial.IdUser;
             UserDev.IdRol = UserDevInicial.IdRol;
-            UserDev.NameUser = "Juan";
-            UserDev.LastNameUser = "Lopez";
+            UserDev.NameUser = "Juana";
+            UserDev.LastNameUser = "Lopeza";
             UserDev.Login = "JuanUser01";
             UserDev.Status_User = (byte)Status_Users.ACTIVO;
             int result = await UserDevDAL.ModificarAsync(UserDev);
@@ -65,11 +65,10 @@ namespace SysTaimsal.DAL.Tests
         [TestMethod()]
         public async Task  BuscarAsyncTest()
         {
-
             var UserDev = new UserDev();
             UserDev.IdRol = UserDevInicial.IdRol;
-            UserDev.NameUser  = "A";
-            UserDev.LastNameUser= "a";
+            UserDev.NameUser  = "U";
+            UserDev.LastNameUser= "u";
             UserDev.Login = "A";
             UserDev.Status_User = (byte)Status_Users.ACTIVO;
             UserDev.Top_Aux = 10;
@@ -81,23 +80,32 @@ namespace SysTaimsal.DAL.Tests
         public async Task CambiarPasswordAsyncTest()
         {
             var UserDev = new UserDev();
-            UserDev.IdUser = UserDevInicial.IdUser;
-            string passwordNuevo = "123456";
+            UserDev.IdUser = 3;
+            string passwordNuevo = "1234567";
             UserDev.Password = passwordNuevo;
             var result = await UserDevDAL.CambiarPasswordAsync(UserDev, UserDevInicial.Password);
             Assert.AreNotEqual(0, result);
             UserDevInicial.Password = passwordNuevo;
         }
+
         [TestMethod()]
         public async Task LoginAsyncTest()
         {
-            var UserDev = new UserDev();
-            UserDev.Login = UserDevInicial.Login;
-            UserDev.Password = UserDevInicial.Password;
-            var resultUserDev = await UserDevDAL.LoginAsync(UserDev);
-            Assert.AreEqual(UserDev.Login, resultUserDev.Login);
+            var pUserDev = new UserDev();        
+            pUserDev.Login = UserDevInicial.Login;
+            pUserDev.Password = UserDevInicial.Password;
+            var resultUserDev = await UserDevDAL.LoginAsync(pUserDev);
+            Assert.AreEqual(pUserDev.Login, resultUserDev.Login);
         }
 
+        [TestMethod()]
+        public void EncryotMD5Test()
+        {
+            UserDev user = new UserDev();
+            user.Password = "password";
+            UserDevDAL.EncryotMD5(user);
+            Assert.AreEqual("5f4dcc3b5aa765d61d8327deb882cf99", user.Password);
+        }
 
         [TestMethod()]
         public async Task EliminarAsyncTest()

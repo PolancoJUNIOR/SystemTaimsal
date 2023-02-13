@@ -1,20 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO.IsolatedStorage;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.IdentityModel.Tokens;
+//*****************************
+using System.Data.Entity;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography;
 using SysTaimsal.EL;
 
 namespace SysTaimsal.DAL
 {
     public class UserDevDAL
     {
-        public static void EncryotMD5(UserDev pUserDev) {
-            using (var md5 = MD5.Create()) {
+        public static void EncryotMD5(UserDev pUserDev)
+        {
+            using (var md5 = MD5.Create())
+            {
                 var result = md5.ComputeHash(Encoding.ASCII.GetBytes(pUserDev.Password));
                 var strEncriptar = "";
                 for (int i = 0; i < result.Length; i++)
@@ -23,7 +25,8 @@ namespace SysTaimsal.DAL
             }
         }
 
-        public static async Task<bool>ExistLogin(UserDev pUserDev,SysTaimsalBDContext pDbContext) {
+        public static async Task<bool> ExistLogin(UserDev pUserDev, SysTaimsalBDContext pDbContext)
+        {
             bool result = false;
             var loginUsuarioExiste = await pDbContext.UserDevs.FirstOrDefaultAsync(s => s.Login == pUserDev.Login && s.IdUser != pUserDev.IdUser);
             if (loginUsuarioExiste != null && loginUsuarioExiste.IdUser > 0 && loginUsuarioExiste.Login == pUserDev.Login)
@@ -120,7 +123,7 @@ namespace SysTaimsal.DAL
             {
                 DateTime fechaInicial = new DateTime(pUsuario.RegistrationUser.Year, pUsuario.RegistrationUser.Month, pUsuario.RegistrationUser.Day, 0, 0, 0);
                 DateTime fechaFinal = fechaInicial.AddDays(1).AddMilliseconds(-1);
-                pQuery = pQuery.Where(s => s.RegistrationUser >= fechaInicial && s.RegistrationUser<= fechaFinal);
+                pQuery = pQuery.Where(s => s.RegistrationUser >= fechaInicial && s.RegistrationUser <= fechaFinal);
             }
             pQuery = pQuery.OrderByDescending(s => s.IdUser).AsQueryable();
             if (pUsuario.Top_Aux > 0)
@@ -150,16 +153,18 @@ namespace SysTaimsal.DAL
         //    }
         //    return usuarios;
         //}
-        public static async Task<UserDev> LoginAsync(UserDev pUsuario)
+        public static async Task<UserDev> LoginAsync(UserDev pUserDev)
         {
-            var usuario = new UserDev();
-            using (var bdContexto = new SysTaimsalBDContext())
+            var userDev = new UserDev();
+
+            using (var dbContext = new SysTaimsalBDContext())
             {
-                EncryotMD5(pUsuario);
-                usuario = await bdContexto.UserDevs.FirstOrDefaultAsync(s => s.Login == pUsuario.Login &&
-                s.Password == pUsuario.Password && s.Status_User== (byte)Status_Users.ACTIVO);
+                EncryotMD5(pUserDev);
+                userDev = await dbContext.UserDevs.FirstOrDefaultAsync(s => s.Login == pUserDev.Login &&
+              s.Password == pUserDev.Password && s.Status_User == (byte)Status_Users.ACTIVO);
+
             }
-            return usuario;
+            return userDev;
         }
         public static async Task<int> CambiarPasswordAsync(UserDev pUsuario, string pPasswordAnt)
         {
