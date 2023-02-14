@@ -3,44 +3,48 @@
 @{
     ViewData["Title"] = "Edit";
 }
+@using (Html.BeginForm("Edit", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <h1>Editar</h1>
 
-<h1>Editar</h1>
-
-<h4>Producto</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="IdProduct" />
-            <div class="form-group mb-3">
-                <label asp-for="NameProduct" class="control-label">Nombre de Producto</label>
-                <input asp-for="NameProduct" class="form-control" />
-                <span asp-validation-for="NameProduct" class="text-danger"></span>
-            </div>
-            <div class="form-group mb-3">
-                <label asp-for="ImageProduct" class="control-label">Imagen de Producto</label>
-                <input asp-for="ImageProduct" class="form-control" />
-                <span asp-validation-for="ImageProduct" class="text-danger"></span>
-            </div>
-            <div class="form-group mb-3">
-                <label asp-for="DescriptionProduct" class="control-label">Descripcion de Producto</label>
-                <input asp-for="DescriptionProduct" class="form-control" />
-                <span asp-validation-for="DescriptionProduct" class="text-danger"></span>
-            </div>
-            <div class="form-group mb-3">
-                <label asp-for="Price" class="control-label">Precio</label>
-                <input asp-for="Price" class="form-control" />
-                <span asp-validation-for="Price" class="text-danger"></span>
-            </div>
-            <div class="form-group mb-3">
-                <button type="submit" value="Save" class="btn btn-success">Editar</button> |
-                <a type="button" class="btn btn-primary" asp-action="Index">Volver a la Lista</a>
-            </div>
-        </form>
+    <h4>Producto</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="IdProduct" />
+                <div class="form-group mb-3">
+                    <label asp-for="NameProduct" class="control-label">Nombre de Producto</label>
+                    <input asp-for="NameProduct" class="form-control" />
+                    <span asp-validation-for="NameProduct" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="ImageProduct" class="control-label">Imagen de Producto</label>
+                    <input asp-for="ImageProduct" type="file" name="FileUpload" id="FileUpload" class="form-control" />
+                    <span asp-validation-for="ImageProduct" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="DescriptionProduct" class="control-label">Descripcion de Producto</label>
+                    <input asp-for="DescriptionProduct" class="form-control" />
+                    <span asp-validation-for="DescriptionProduct" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Price" class="control-label">Precio</label>
+                    <input asp-for="Price" class="form-control" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <button type="submit" value="Save" class="btn btn-success">Editar</button> |
+                    <a type="button" class="btn btn-primary" asp-action="Index">Volver a la Lista</a>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @section Scripts {
+    @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+    }
 }

@@ -29,7 +29,7 @@
                     @Html.DisplayFor(modelItem => item.NameMachine)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ImageMachine)
+                    <img src="@item.ImageMachine" class="rounded" alt="..." width="50" height="50">
                 </td>
                 <td>
                     <a type="button" class="btn btn-success" asp-action="Edit" asp-route-id="@item.IdMachine">Editar</a>

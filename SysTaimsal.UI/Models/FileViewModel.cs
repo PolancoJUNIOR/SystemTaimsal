@@ -4,19 +4,26 @@
     {
         public string name { get; set; }
         public string path { get; set; }
+        public Guid guid = new Guid();
 
         public static string SaveFile(IFormFile archivo)
         {
             FileViewModel fileViewModel = new FileViewModel();
-            //renombrar el archivo
             fileViewModel.name = Guid.NewGuid().ToString() + archivo.FileName;
             fileViewModel.path = Path.Combine(Directory.GetCurrentDirectory() + "\\wwwroot\\GuardarImagen\\" + fileViewModel.name);
-            //guardar la immage en la carpeta img
             using var stream = new FileStream(fileViewModel.path, FileMode.Create);
             archivo.CopyTo(stream);
-            //guardar la ruta relativa del archivo en sql
-            //retornar la ruta relativa del archivo
             return "..\\GuardarImagen\\" + fileViewModel.name;
+        }
+
+        public static string SaveFileProduct(IFormFile archivo)
+        {
+            FileViewModel fileViewModel = new FileViewModel();
+            fileViewModel.name = Guid.NewGuid().ToString() + archivo.FileName;
+            fileViewModel.path = Path.Combine(Directory.GetCurrentDirectory() + "\\wwwroot\\MetGuaProduct\\" + fileViewModel.name);
+            using var stream = new FileStream(fileViewModel.path, FileMode.Create);
+            archivo.CopyTo(stream);
+            return "..\\MetGuaProduct\\" + fileViewModel.name;
         }
     }
 }

@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.PortableExecutable;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using SysTaimsal.BL;
 using SysTaimsal.DAL;
 using SysTaimsal.EL;
+using SysTaimsal.UI.Models;
 
 namespace SysTaimsal.UI.Controllers
 {
@@ -17,7 +20,7 @@ namespace SysTaimsal.UI.Controllers
         // GET: Product
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Products.ToListAsync());
+            return View(await _context.Products.ToListAsync());
         }
 
         // GET: Product/Details/5
@@ -49,15 +52,23 @@ namespace SysTaimsal.UI.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdProduct,NameProduct,ImageProduct,DescriptionProduct,Price")] Product product)
+        public async Task<IActionResult> Create([Bind("IdProduct,NameProduct,ImageProduct,DescriptionProduct,Price")] Product product, IFormFile FileUpload)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(product);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                product.ImageProduct = FileViewModel.SaveFileProduct(FileUpload);
+                if (ModelState.IsValid)
+                {
+                    _context.Add(product);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                return View(product);
             }
-            return View(product);
+            catch
+            {
+                return View(product);
+            }
         }
 
         // GET: Product/Edit/5
@@ -81,13 +92,13 @@ namespace SysTaimsal.UI.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdProduct,NameProduct,ImageProduct,DescriptionProduct,Price")] Product product)
+        public async Task<IActionResult> Edit(int id, [Bind("IdProduct,NameProduct,ImageProduct,DescriptionProduct,Price")] Product product, IFormFile FileUpload)
         {
             if (id != product.IdProduct)
             {
                 return NotFound();
             }
-
+            product.ImageProduct = FileViewModel.SaveFileProduct(FileUpload);
             if (ModelState.IsValid)
             {
                 try
@@ -143,14 +154,14 @@ namespace SysTaimsal.UI.Controllers
             {
                 _context.Products.Remove(product);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ProductExists(int id)
         {
-          return _context.Products.Any(e => e.IdProduct == id);
+            return _context.Products.Any(e => e.IdProduct == id);
         }
     }
 }

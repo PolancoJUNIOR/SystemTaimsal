@@ -15,11 +15,19 @@ namespace SysTaimsal.UI.Controllers
     public class MachineController : Controller
     {
         private readonly SysTaimsalBDContext _context = new SysTaimsalBDContext();
-
+        private string SaveFile(IFormFile archivo)
+        {
+            FileViewModel fileViewModel = new FileViewModel();
+            fileViewModel.name = Guid.NewGuid().ToString() + archivo.FileName;
+            fileViewModel.path = Path.Combine(Directory.GetCurrentDirectory() + "\\wwwroot\\GuardarImagen" + fileViewModel.name);
+            using var stream = new FileStream(fileViewModel.path, FileMode.Create);
+            archivo.CopyTo(stream);
+            return "..\\GuardarImagen\\" + fileViewModel.name;
+        }
         // GET: Machine
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Machines.ToListAsync());
+            return View(await _context.Machines.ToListAsync());
         }
 
         // GET: Machine/Details/5
@@ -51,7 +59,7 @@ namespace SysTaimsal.UI.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdMachine,NameMachine,ImageMachine")] Machine machine , IFormFile FileUpload)
+        public async Task<IActionResult> Create([Bind("IdMachine,NameMachine,ImageMachine")] Machine machine, IFormFile FileUpload)
         {
             try
             {
@@ -66,7 +74,7 @@ namespace SysTaimsal.UI.Controllers
             }
             catch
             {
-                return View();
+                return View(machine);
             }
         }
 
@@ -91,13 +99,14 @@ namespace SysTaimsal.UI.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdMachine,NameMachine,ImageMachine")] Machine machine)
+        public async Task<IActionResult> Edit(int id, [Bind("IdMachine,NameMachine,ImageMachine")] Machine machine, IFormFile FileUpload)
         {
             if (id != machine.IdMachine)
             {
                 return NotFound();
             }
 
+            machine.ImageMachine = FileViewModel.SaveFile(FileUpload);
             if (ModelState.IsValid)
             {
                 try
@@ -153,14 +162,14 @@ namespace SysTaimsal.UI.Controllers
             {
                 _context.Machines.Remove(machine);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool MachineExists(int id)
         {
-          return _context.Machines.Any(e => e.IdMachine == id);
+            return _context.Machines.Any(e => e.IdMachine == id);
         }
     }
 }

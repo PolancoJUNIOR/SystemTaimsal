@@ -26,6 +26,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\GuardarImagen\" />
+    <Folder Include="wwwroot\MetGuaProduct\" />
   </ItemGroup>
 
 </Project>
