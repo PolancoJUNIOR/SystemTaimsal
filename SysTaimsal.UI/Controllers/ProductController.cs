@@ -148,6 +148,12 @@ namespace SysTaimsal.UI.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public IActionResult Jobs()
+        {
+            return View();
+        }
+
+
         private bool ProductExists(int id)
         {
           return _context.Products.Any(e => e.IdProduct == id);

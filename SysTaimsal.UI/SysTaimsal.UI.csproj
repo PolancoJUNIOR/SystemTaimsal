@@ -26,6 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Views\Jobs\" />
     <Folder Include="wwwroot\GuardarImagen\" />
   </ItemGroup>
 
