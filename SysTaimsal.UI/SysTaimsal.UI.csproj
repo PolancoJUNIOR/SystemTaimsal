@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="GMap.NET.Core" Version="2.1.7" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.10" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.10" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.10" />
@@ -25,6 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Views\Jobs\" />
     <Folder Include="wwwroot\GuardarImagen\" />
     <Folder Include="wwwroot\MetGuaProduct\" />
   </ItemGroup>
