@@ -1,0 +1,54 @@
+﻿@model IEnumerable<SysTaimsal.EL.Product>
+
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+<link rel="stylesheet" href="~/css/site.css" asp-append-version="false" />
+<link rel="stylesheet" href="~/css/Shop.css" asp-append-version="true" />
+
+<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <button class="btn btn-dark" type="button">
+        <i class='bx bx-calculator' id="cart-icon"></i>
+    </button>
+</div>
+
+<!-- Header -->
+<header class="div__cart">
+    <!-- Nav -->
+    <div class="container__shop">
+        <!-- <a href="#" class="logo">Ecommerce</a> -->
+        <!-- Cart Icon -->
+        <!-- Cart -->
+        <div class="cart">
+            <h2 class="cart-title">Tu Cotización</h2>
+            <!-- Content -->
+            <div class="cart-content">
+            </div>
+            <!-- Total -->
+            <div class="total">
+                <div class="total-title">Total</div>
+                <div class="total-price">$0</div>
+            </div>
+            <!-- Buy Button -->
+            <button type="button" class="btn-buy">Borrar Todo</button>
+            <!-- Cart Close -->
+            <i class='bx bx-x' id="close-cart"></i>
+        </div>
+    </div>
+</header>
+<!-- Shop -->
+<section class="shop container__shop">
+    <h2 class="section__title" style="padding-bottom:5%">Cotizaciones</h2>
+    <!-- Content -->
+    <div class="shop-content">
+        @foreach (var item in Model)
+        {
+            <div class="product-box">
+                <h2 class="product-title">@item.NameProduct</h2>
+                <span class="price">$@item.Price</span>
+                <img src="@item.ImageProduct" alt="" class="product-img" width="500" height="500">
+                <i class='bx bx-plus add-cart'></i>
+            </div>
+        }
+    </div>
+</section>
+<script src="~/js/site.js" asp-append-version="false"></script>
+<script src="~/js/Shop.js" asp-append-version="true"></script>

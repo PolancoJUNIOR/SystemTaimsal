@@ -15,15 +15,5 @@
             archivo.CopyTo(stream);
             return "..\\GuardarImagen\\" + fileViewModel.name;
         }
-
-        public static string SaveFileProduct(IFormFile archivo)
-        {
-            FileViewModel fileViewModel = new FileViewModel();
-            fileViewModel.name = Guid.NewGuid().ToString() + archivo.FileName;
-            fileViewModel.path = Path.Combine(Directory.GetCurrentDirectory() + "\\wwwroot\\MetGuaProduct\\" + fileViewModel.name);
-            using var stream = new FileStream(fileViewModel.path, FileMode.Create);
-            archivo.CopyTo(stream);
-            return "..\\MetGuaProduct\\" + fileViewModel.name;
-        }
     }
 }

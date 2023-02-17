@@ -1,0 +1,120 @@
+﻿@{
+    ViewData["Title"] = "Jobs";
+}
+
+<div style="text-align:end">
+    <p class="fs-2 text-success">Total: $00.00</p>
+</div>
+
+<div class="container-fluid overflow-hidden">
+    <div class="row gy-5">
+        <div class="col-7">
+
+            <h4 class="text-center p-2">Productos Seleccionados</h4>
+            <div class="table-responsive-sm">
+
+
+                <table class="table table-secondary">
+                    <thead class="text-center border-5 border-light">
+                        <tr>
+                            <th><i class="bi bi-image"></i> Imagen</th>
+                            <th><i class="bi bi-card-text"></i> Descripción</th>
+                            <th><i class="bi bi-sort-numeric-up-alt"></i> Cantidad</th>
+                            <th><i class="bi bi-currency-dollar"></i> Precio</th>
+                            <th><i class="bi bi-123"></i> Código</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center border-5 border-light">
+                        <tr class="align-middle">
+                            <td>
+                                <img class="rounded-circle" src="~/Img/Image.jpg" alt="" height="75px" width="75px" />
+                            </td>
+                            <td>Nombre</td>
+                            <td>
+                                <div class="col-md-4 mx-auto d-block">
+                                    <input type="number" class="form-control form-control-sm" placeholder="0">
+                                </div>
+                            </td>
+                            <td>$ 00.00</td>
+                            <td>0000</td>
+                            <td>
+                                <button class="btn btn-danger" type="button"><i class="bi bi-trash3"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody class="text-center border-5 border-light">
+                        <tr class="align-middle">
+                            <td>
+                                <img class="rounded-circle" src="~/Img/Image.jpg" alt="" height="75px" width="75px" />
+                            </td>
+                            <td>Nombre</td>
+                            <td>
+                                <div class="col-md-4 mx-auto d-block">
+                                    <input type="number" class="form-control form-control-sm" placeholder="0">
+                                </div>
+                            </td>
+                            <td>$ 00.00</td>
+                            <td>0000</td>
+                            <td>
+                                <button class="btn btn-danger" type="button"><i class="bi bi-trash3"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody class="text-center border-5 border-light">
+                        <tr class="align-middle">
+                            <td>
+                                <img class="rounded-circle" src="~/Img/Image.jpg" alt="" height="75px" width="75px" />
+                            </td>
+                            <td>Nombre</td>
+                            <td>
+                                <div class="col-md-4 mx-auto d-block">
+                                    <input type="number" class="form-control form-control-sm" placeholder="0">
+                                </div>
+                            </td>
+                            <td>$ 00.00</td>
+                            <td>0000</td>
+                            <td>
+                                <button class="btn btn-danger" type="button"><i class="bi bi-trash3"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-5">
+            <div class="p-1">
+                <h4 class="text-center p-3">Detalles de Facturación</h4>
+                <form class="row g-3 text-white rounded-3 align-content-center" style="background-color:#022A30">
+                    <div class="col-md-6">
+                        <label class="form-label">Nombre</label>
+                        <input type="text" class="form-control" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Apellido</label>
+                        <input type="text" class="form-control" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Email</label>
+                        <input type="text" class="form-control" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Contraseña</label>
+                        <input type="password" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Fecha Entrega</label>
+                        <input type="date" class="form-control" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">DUI</label>
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="col-12 rounded-bottom text-center" style="background-color:#158E78;padding-top:2%;padding-bottom:2%">
+                        <button type="submit" class="btn btn-success">Aceptar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

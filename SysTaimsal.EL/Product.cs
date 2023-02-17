@@ -22,13 +22,12 @@ namespace SysTaimsal.EL
         [StringLength(40, ErrorMessage = "Maximo 40 caracteres")]
         [Display(Name = "Producto")]
         public string NameProduct { get; set; }
-        [Required(ErrorMessage = "Imagen necesaria")]
-        public string ImageProduct { get; set; }
-        [StringLength(500, ErrorMessage = "Maximo 500 caracteres")]
         public string? DescriptionProduct { get; set; }
         [Required(ErrorMessage = "Precio es obligatorio")]
         [Display(Name = "Precio")]
         public decimal? Price { get; set; }
+        public string? ImageProduct { get; set; }
+
         [NotMapped]
         public int Top_Aux { get; set; }
         [ForeignKey("IdReport")]

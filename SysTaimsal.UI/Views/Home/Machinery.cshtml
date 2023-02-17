@@ -1,0 +1,24 @@
+﻿@model IEnumerable<SysTaimsal.EL.Machine>
+
+@{
+    ViewData["Title"] = "Machinery";
+}
+
+<h1 class="my-2 text-center">
+    Maquinas <i class="bi bi-columns-gap"></i>
+</h1>
+<section class="p-3">
+    <div class="row">
+                @foreach (var item in Model)
+{
+            <div class="col-md-6 col-sm-12 p-3">
+                <div class="card" style="background-color:#083A84">
+                <img src="@item.ImageMachine" class="card-img-top">
+                <div class="card-body">
+                        <h5 class="card-title" style="color:white"> @item.NameMachine</h5>
+                </div>
+            </div>
+        </div>
+}
+    </div>
+</section>
