@@ -31,7 +31,7 @@ namespace SysTaimsal.EL
 
         [Required(ErrorMessage = "Password es obligatorio")]
         [DataType(DataType.Password)]
-        [StringLength(32, ErrorMessage = "Password debe estar entre 5 a 32 caracteres", MinimumLength = 5)]
+        [StringLength(64, ErrorMessage = "Password debe estar entre 5 a 32 caracteres", MinimumLength = 5)]
         public string Password { get; set; }
 
         [Required(ErrorMessage = "Estatus es obligatorio")]

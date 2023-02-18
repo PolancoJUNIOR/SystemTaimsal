@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 //*****************************
-using System.Data.Entity;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
 using SysTaimsal.EL;
@@ -23,16 +22,33 @@ namespace SysTaimsal.DAL
                     strEncriptar += result[i].ToString("x2").ToLower();
                 pUserDev.Password = strEncriptar;
             }
+            //using (var md5 = new MD5CryptoServiceProvider())
+            //{
+            //    var result = md5.ComputeHash(Encoding.ASCII.GetBytes(pUserDev.Password));
+            //    var strEncriptar = BitConverter.ToString(result).Replace("-", "").ToLower();
+            //    pUserDev.Password = strEncriptar;
+            //}
         }
 
-        public static async Task<bool> ExistLogin(UserDev pUserDev, SysTaimsalBDContext pDbContext)
+        public static void EncryptSHA256(UserDev pUserDev)
         {
-            bool result = false;
-            var loginUsuarioExiste = await pDbContext.UserDevs.FirstOrDefaultAsync(s => s.Login == pUserDev.Login && s.IdUser != pUserDev.IdUser);
-            if (loginUsuarioExiste != null && loginUsuarioExiste.IdUser > 0 && loginUsuarioExiste.Login == pUserDev.Login)
-                result = true;
-            return result;
+            using (var sha256 = new SHA256Managed())
+            {
+                var result = sha256.ComputeHash(Encoding.ASCII.GetBytes(pUserDev.Password));
+                var strEncriptar = "";
+                for (int i = 0; i < result.Length; i++)
+                    strEncriptar += result[i].ToString("x2").ToLower();
+                pUserDev.Password = strEncriptar;
+            }
         }
+
+        private static async Task<bool> ExistLogin(UserDev pUserDev, SysTaimsalBDContext pDbContext)
+        {
+            return await pDbContext.UserDevs
+                .Where(s => s.Login == pUserDev.Login && s.IdUser != pUserDev.IdUser)
+                .AnyAsync();
+        }
+
 
 
         #region CRUD
@@ -142,30 +158,66 @@ namespace SysTaimsal.DAL
             return Usuarios;
         }
         #endregion
-        //public static async Task<List<UserDev>> BuscarIncluirRolesAsync(UserDev pUsuario)
-        //{
-        //    var usuarios = new List<UserDev>();
-        //    using (var bdContexto = new SysTaimsalBDContext())
-        //    {
-        //        var select = bdContexto.UserDevs.AsQueryable();
-        //        select = QuerySelect(select, pUsuario).Include(s => s.IdRol).AsQueryable();
-        //        usuarios = await select.ToListAsync();
-        //    }
-        //    return usuarios;
-        //}
+        public static async Task<List<UserDev>> BuscarIncluirRolesAsync(UserDev pUsuario)
+        {
+            var usuarios = new List<UserDev>();
+            using (var bdContexto = new SysTaimsalBDContext())
+            {
+                var select = bdContexto.UserDevs.AsQueryable();
+                select = QuerySelect(select, pUsuario).Include(s => s.IdRol).AsQueryable();
+                usuarios = await select.ToListAsync();
+            }
+            return usuarios;
+        }
         public static async Task<UserDev> LoginAsync(UserDev pUserDev)
         {
-            var userDev = new UserDev();
-
-            using (var dbContext = new SysTaimsalBDContext())
+            var usuario = new UserDev();
+            using (var bdContexto = new SysTaimsalBDContext())
             {
-                EncryotMD5(pUserDev);
-                userDev = await dbContext.UserDevs.FirstOrDefaultAsync(s => s.Login == pUserDev.Login &&
-              s.Password == pUserDev.Password && s.Status_User == (byte)Status_Users.ACTIVO);
-
+                EncryotMD5(pUserDev); 
+                usuario = await bdContexto.UserDevs.FirstOrDefaultAsync(s => s.Login == pUserDev.Login &&
+                s.Password == pUserDev.Password && s.Status_User == (byte)Status_Users.ACTIVO);
             }
-            return userDev;
+            return usuario;
         }
+
+        //public static async Task<UserDev> LoginAsync(UserDev pUserDev)
+        //{
+        //    UserDev userDev;
+
+        //    using (var dbContext = new SysTaimsalBDContext())
+        //    {
+        //        EncryotMD5(pUserDev);
+        //        userDev = await dbContext.UserDevs.
+        //            SingleOrDefaultAsync(s => s.Login == pUserDev.Login &&
+        //                                 s.Password == pUserDev.Password && 
+        //                                 s.Status_User == (byte)Status_Users.ACTIVO);
+        //    }
+
+        //    if (userDev == null)
+        //    {
+        //        // manejar la situación donde no se encuentra un usuario
+        //    }
+
+        //    return userDev;
+        //}
+
+
+        //public static async Task<UserDev> LoginAsync(UserDev pUserDev)
+        //{
+        //    EncryotMD5(pUserDev);
+
+        //    using (var dbContext = new SysTaimsalBDContext())
+        //    {
+
+        //        return await dbContext.UserDevs
+        //            .SingleOrDefaultAsync(s => s.Login == pUserDev.Login &&
+        //                                       s.Password == pUserDev.Password &&
+        //                                       s.Status_User == (byte)Status_Users.ACTIVO);
+        //    }
+        //}
+
+
         public static async Task<int> CambiarPasswordAsync(UserDev pUsuario, string pPasswordAnt)
         {
             int result = 0;

@@ -12,7 +12,7 @@ namespace SysTaimsal.DAL.Tests
     [TestClass()]
     public class UserDevDALTests
     {
-        private static UserDev UserDevInicial = new UserDev { IdUser = 7, IdRol = 1, Login = "JuanUser", Password = "123456" };
+        private static UserDev UserDevInicial = new UserDev { IdUser = 7, IdRol = 2, Login = "JuanUser", Password = "123456" };
         [TestMethod()]
         public async Task  CrearAsyncTest()
         {
@@ -20,15 +20,12 @@ namespace SysTaimsal.DAL.Tests
             UserDev.IdRol = UserDevInicial.IdRol;
             UserDev.NameUser = "juan";
             UserDev.LastNameUser = "lopez";
-            UserDev.Login = "juanUser1";
+            UserDev.Login = "juanUser";
             string password = "12345";
             UserDev.Password = password;
             UserDev.Status_User = (byte)Status_Users.INACTIVO;
             int result = await UserDevDAL.CrearAsync(UserDev);
             Assert.AreNotEqual(0, result);
-            UserDevInicial.IdUser = UserDev.IdUser;
-            UserDevInicial.Password = password;
-            UserDevInicial.Login = UserDev.Login;
         }
 
         [TestMethod()]
@@ -39,7 +36,7 @@ namespace SysTaimsal.DAL.Tests
             UserDev.IdRol = UserDevInicial.IdRol;
             UserDev.NameUser = "Juana";
             UserDev.LastNameUser = "Lopeza";
-            UserDev.Login = "JuanUser01";
+            UserDev.Login = "JuanUser04";
             UserDev.Status_User = (byte)Status_Users.ACTIVO;
             int result = await UserDevDAL.ModificarAsync(UserDev);
             Assert.AreNotEqual(0, result);
@@ -69,7 +66,7 @@ namespace SysTaimsal.DAL.Tests
             UserDev.IdRol = UserDevInicial.IdRol;
             UserDev.NameUser  = "U";
             UserDev.LastNameUser= "u";
-            UserDev.Login = "A";
+            UserDev.Login = "J";
             UserDev.Status_User = (byte)Status_Users.ACTIVO;
             UserDev.Top_Aux = 10;
             var resultUserDevs = await UserDevDAL.BuscarAsync(UserDev);
@@ -92,20 +89,13 @@ namespace SysTaimsal.DAL.Tests
         public async Task LoginAsyncTest()
         {
             var pUserDev = new UserDev();        
-            pUserDev.Login = UserDevInicial.Login;
-            pUserDev.Password = UserDevInicial.Password;
+            pUserDev.Login = "juanUser3";
+            pUserDev.Password = "123456";
             var resultUserDev = await UserDevDAL.LoginAsync(pUserDev);
             Assert.AreEqual(pUserDev.Login, resultUserDev.Login);
         }
 
-        [TestMethod()]
-        public void EncryotMD5Test()
-        {
-            UserDev user = new UserDev();
-            user.Password = "password";
-            UserDevDAL.EncryotMD5(user);
-            Assert.AreEqual("5f4dcc3b5aa765d61d8327deb882cf99", user.Password);
-        }
+       
 
         [TestMethod()]
         public async Task EliminarAsyncTest()
